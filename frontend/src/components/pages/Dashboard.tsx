@@ -78,7 +78,7 @@ function Dashboard() {
         <div className="max-w-250 mx-auto">
             <div className="container mx-auto py-5">
                 <h1 className="text-3xl font-bold mb-6 text-center md:text-left">
-                    Bienvenido a Mi Cine !!!
+                    Bienvenido a Mi Cine !!
                 </h1>
                 <div className="grid gap-6 md:grid-cols-2">
 
