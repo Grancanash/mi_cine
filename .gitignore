@@ -1,0 +1,66 @@
+# ==================
+# GLOBAL
+# ==================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.sqlite3
+*.log
+*.pot
+*.pyc
+
+.env
+.env.*
+*.env
+
+# ==================
+# DJANGO / PYTHON BACKEND
+# ==================
+backend/.venv/
+backend/venv/
+backend/bin/
+backend/include/
+backend/lib/
+backend/lib64/
+backend/pyvenv.cfg
+
+# DB local
+backend/db.sqlite3
+
+# Django static & media (generados)
+backend/staticfiles/
+backend/media/
+
+# Node en backend (para Tailwind, etc.)
+backend/node_modules/
+backend/package-lock.json
+
+# ==================
+# FRONTEND (Vite + React)
+# ==================
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/.vite-temp/
+frontend/*.log
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+
+# ==================
+# ARCHIVOS AUXILIARES QUE ME HAS ENSEÑADO
+# ==================
+tree.txt
+tree.text
+
+# ==================
+# SISTEMA / EDITOR
+# ==================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo

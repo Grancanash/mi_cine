@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Sansation:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+@import "tailwindcss";
+
+@plugin "daisyui" {
+  themes: corporate --default, business --prefersdark, corporate;
+}
+
+
+@theme {
+  --font-sans: "Sansation", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+
+  html,
+  body {
+    @apply font-sans antialiased;
+  }
+}
+
+.grid-cols-auto-fit {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+}

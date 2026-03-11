@@ -1,0 +1,39 @@
+import type { Actor as ActorType } from "../../types/Actor";
+import ActorDetail from "./ActorDetail";
+import { Link } from "react-router-dom";
+import EditIcon from "../icons/EditIcon";
+
+function Title({actor}:{actor:ActorType}) {
+
+    return (
+        <li className="list-row p-0 md:px-4 flex">
+            <div className="flex-11">
+                <div className="collapse collapse-arrow bg-base-100">
+                    <input type="checkbox" />
+                    <div className="collapse-title font-semibold flex flex-col md:flex-row align-middle pointer-events-none z-10">
+
+                        {/* ------------------------------------------- TÍTULO */}
+                        <div className="text-lg flex-11 flex items-center">{actor.name}</div>
+
+                        <div className="flex">
+                            {/* ------------------------------------------- EDICIÓN */}
+                            <div className="flex-1 flex items-center">
+                                <div>
+                                    <Link to={`/actors/${actor.id}`} className="btn-title-update btn btn-square btn-ghost hover:bg-transparent hover:border-transparent pointer-events-auto z-20" title="Editar">
+                                        <EditIcon />
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div className="collapse-content text-sm">
+                        <ActorDetail actor={actor} />
+                    </div>
+                </div>
+            </div>
+        </li>
+    );
+}
+
+export default Title;
