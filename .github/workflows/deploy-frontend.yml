@@ -25,10 +25,9 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "
             cd /var/www/mi_cine && \
-            git pull && \
+            git pull origin main && \
             cd frontend && \
             npm install && \
             npm run build && \
-            # SI SIRVES ESTÁTICOS CON NGINX, QUIZÁ SOLO NECESITES ESTO:
             sudo systemctl reload nginx || echo 'no nginx reload'
           "

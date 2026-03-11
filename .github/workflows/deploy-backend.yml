@@ -25,11 +25,10 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "
             cd /var/www/mi_cine && \
-            git pull && \
+            git pull origin main && \
             cd backend && \
             source .venv/bin/activate && \
             pip install -r requirements.txt && \
             python manage.py migrate && \
-            # AJUSTA ESTO AL NOMBRE DE TU SERVICIO GUNICORN/UVICORN
             sudo systemctl restart gunicorn_mi_cine.service || echo 'no service'
           "
