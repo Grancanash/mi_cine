@@ -27,7 +27,7 @@ jobs:
             cd /var/www/mi_cine && \
             git pull origin main && \
             cd backend && \
-            source .venv/bin/activate && \
+            source venv/bin/activate && \
             pip install -r requirements.txt && \
             python manage.py migrate && \
             sudo systemctl restart gunicorn_mi_cine.service || echo 'no service'
