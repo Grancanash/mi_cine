@@ -201,3 +201,5 @@ CSRF_TRUSTED_ORIGINS = [
     "http://localhost:5173",  # si lo sigues usando
     "http://127.0.0.1:5173",
 ]
+
+# test deploy backend
