@@ -49,32 +49,32 @@ function TitlesToolbar({order, setOrder, total, setDebouncedSearch, loaderMainRe
 
     return(
         <div className="md:px-0">
-            <div className="flex flex-col md:flex-row justify-between md:mb-4 md:gap-4 items-center">
-                <h1 className="text-2xl font-bold md:py-0 p-3">Mi Lista</h1>
+            <div className="flex flex-col md:flex-row justify-between md:gap-4 items-center">
+                <h1 className="text-2xl font-bold md:py-0 pb-3 md:p-3">Mi Lista</h1>
 
                 {/* ---------------------------------------------------- ORDEN */}
                 <div className="text-end order-titles flex flex-wrap gap-1 bg-white p-4 md:p-0 md:bg-transparent">
-                    <div className={`btn font-light badge badge-primary ${order === "-created_at" ? "" : "badge-outline" } hover:bg-primary hover:text-primary-content`}
+                    <div className={`btn font-light badge badge-secondary ${order === "-created_at" ? "" : "badge-outline" } hover:bg-secondary hover:text-secondary-content`}
                         onClick={() => setOrder("-created_at")}>
                         + Recientes
                     </div>
-                    <div className={`btn font-light badge badge-primary ${order === "created_at" ? "" : "badge-outline"} hover:bg-primary hover:text-primary-content`}
+                    <div className={`btn font-light badge badge-secondary ${order === "created_at" ? "" : "badge-outline"} hover:bg-secondary hover:text-secondary-content`}
                         onClick={() => setOrder("created_at")}>
                         + Antiguas
                     </div>
-                    <div className={`btn font-light badge badge-primary ${order === "name" ? "" : "badge-outline"} hover:bg-primary hover:text-primary-content`}
+                    <div className={`btn font-light badge badge-secondary ${order === "name" ? "" : "badge-outline"} hover:bg-secondary hover:text-secondary-content`}
                         onClick={() => setOrder("name")}>
                         A..Z
                     </div>
-                    <div className={`btn font-light badge badge-primary ${order === "-name" ? "" : "badge-outline"} hover:bg-primary hover:text-primary-content`}
+                    <div className={`btn font-light badge badge-secondary ${order === "-name" ? "" : "badge-outline"} hover:bg-secondary hover:text-secondary-content`}
                         onClick={() => setOrder("-name")}>
                         Z..A
                     </div>
-                    <div className={`btn font-light badge badge-primary ${order === "-year" ? "" : "badge-outline"} hover:bg-primary hover:text-primary-content gap-1`}
+                    <div className={`btn font-light badge badge-secondary ${order === "-year" ? "" : "badge-outline"} hover:bg-secondary hover:text-secondary-content gap-1`}
                         onClick={() => setOrder("-year")}>
                         Estreno <ArrowDownIcon />
                     </div>
-                    <div className={`btn font-light badge badge-primary ${order === "year" ? "" : "badge-outline"} hover:bg-primary hover:text-primary-content gap-1`}
+                    <div className={`btn font-light badge badge-secondary ${order === "year" ? "" : "badge-outline"} hover:bg-secondary hover:text-secondary-content gap-1`}
                         onClick={() => setOrder("year")}>
                         Estreno <ArrowUpIcon />
                     </div>
@@ -101,11 +101,10 @@ function TitlesToolbar({order, setOrder, total, setDebouncedSearch, loaderMainRe
                 </div>
                 {/* ---------------------------------------------------- BOTONES FILTROS / AÑADIR TÍTULO */}
                 <div className="flex justify-end items-center gap-1">
-                    <button id="btn-filter" className="btn btn-primary" data-target="filters-collapse"
-                        onClick={showFilters}>
+                    <button id="btn-filter" className="btn bg-secondary text-white hover:bg-secondary font-light" data-target="filters-collapse" onClick={showFilters}>
                         Filtros
                     </button>
-                    <Link to="/titles/new" className="btn btn-primary">Nuevo</Link>
+                    <Link to="/titles/new" className="btn bg-secondary text-white hover:bg-secondary font-light">Nuevo</Link>
                     <div className="total-titles whitespace-nowrap pl-4 md:px-4 flex-1 md:hidden">
                         {total} título{total !== 1 ? "s" : ""}
                     </div>

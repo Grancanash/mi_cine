@@ -39,16 +39,16 @@ function TitlesToolbar({order, setOrder, total, setDebouncedSearch, loaderMainRe
 
     return(
         <>
-        <div className="flex flex-col md:flex-row justify-between md:mb-4 md:gap-4 items-center">
-            <h1 className="text-2xl font-bold md:my-0 md:py-0 p-3">Actores</h1>
+        <div className="flex flex-col md:flex-row justify-between md:gap-4 items-center">
+            <h1 className="text-2xl font-bold md:py-0 pb-3 md:p-3">Actores</h1>
 
             {/* ---------------------------------------------------- ORDEN */}
             <div className="text-end order-titles flex flex-wrap gap-1 bg-white p-4 md:p-0 md:bg-transparent w-full md:w-auto">
-                <div className={`btn font-light badge badge-primary ${order === "name" ? "" : "badge-outline"} hover:bg-primary hover:text-primary-content`}
+                <div className={`btn font-light badge badge-secondary ${order === "name" ? "" : "badge-outline"} hover:bg-secondary hover:text-secondary-content`}
                     onClick={() => setOrder("name")}>
                     A..Z
                 </div>
-                <div className={`btn font-light badge badge-primary ${order === "-name" ? "" : "badge-outline"} hover:bg-primary hover:text-primary-content`}
+                <div className={`btn font-light badge badge-secondary ${order === "-name" ? "" : "badge-outline"} hover:bg-secondary hover:text-secondary-content`}
                     onClick={() => setOrder("-name")}>
                     Z..A
                 </div>
@@ -60,7 +60,6 @@ function TitlesToolbar({order, setOrder, total, setDebouncedSearch, loaderMainRe
             <div className="flex flex-col md:flex-row items-center md:w-200">
                 <label className="input w-full md:flex-10">
                     <SearchIcon />
-                    {/* <input type="search" placeholder="Buscar" id="titleSearchInput" onChange={(e) => setSearch(e.target.value)} /> */}
                     <input type="search" placeholder="Buscar" id="titleSearchInput" onChange={handleChangeInput} />
                 </label>
                 <div className="total-titles whitespace-nowrap px-4 flex-1 hidden md:block">

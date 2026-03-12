@@ -361,7 +361,7 @@ function TitlePage() {
 
 
     return (
-        <div className="p-6 max-w-250 mx-4 md:mx-auto flex flex-col gap-6" data-theme="light">
+        <div className="p-4 md:px-0 py-8 max-w-250 md:mx-auto flex flex-col gap-6">
 
             {/* ------------------------------------- CABECERA (TÍTULO / BUSCAR / FILTROS) */}
             <HeaderTitle

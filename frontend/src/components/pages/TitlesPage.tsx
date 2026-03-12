@@ -232,7 +232,7 @@ function TitlesPage() {
     }, []);
 
     return (
-        <div className="max-w-250 mx-auto md:py-5">
+        <div className="max-w-250 mx-auto p-4 py-8! md:p-0">
             <TitlesToolbar
                 order={order}
                 setOrder={handleChangeOrder}

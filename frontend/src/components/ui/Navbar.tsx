@@ -8,11 +8,13 @@ function Navbar({isLoggedIn, onLogout}: {isLoggedIn: boolean, onLogout: () => vo
           <div className="md:pr-10 mt-2 mb-2 mr-3 flex-1 md:flex-auto md:w-auto flex justify-center">
             <Link to="/"><img src={logo} alt="Logo Mi cine" className="h-20 object-contain" /></Link>
           </div>
-          <div className="flex flex-col md:flex-row md:items-end ml-0 pl-5 w-full pb-1 flex-1 md:flex-auto gap-1">
-            <Link className="btn btn-light font-normal h-8" to="/actors">Actores</Link>
-            <Link className="btn btn-light font-normal h-8" to="/titles">Mi lista</Link>
+          <div className="flex flex-col md:justify-between md:flex-row md:items-end ml-0 pl-5 w-full pb-1 flex-1 md:flex-auto gap-1">
+            <div className="flex flex-col md:flex-row gap-1">
+                <Link className="btn btn-light font-normal h-8" to="/actors">Actores</Link>
+                <Link className="btn btn-light font-normal h-8" to="/titles">Mi lista</Link>
+            </div>
             {isLoggedIn && (
-              <button className="btn btn-light font-normal b-0 h-8" onClick={onLogout}>
+              <button className="btn bg-primary text-white font-normal b-0 h-8" onClick={onLogout}>
                 Cerrar sesión
               </button>
             )}
