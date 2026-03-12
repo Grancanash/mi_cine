@@ -2,23 +2,23 @@
 @import "tailwindcss";
 
 @plugin "daisyui" {
-  themes: corporate --default, business --prefersdark, corporate;
+    themes: corporate --default;
 }
 
 
 @theme {
-  --font-sans: "Sansation", ui-sans-serif, system-ui, sans-serif;
+    --font-sans: "Sansation", ui-sans-serif, system-ui, sans-serif;
 }
 
 @layer base {
 
-  html,
-  body {
-    @apply font-sans antialiased;
-  }
+    html,
+    body {
+        @apply font-sans antialiased;
+    }
 }
 
 .grid-cols-auto-fit {
-  display: grid;
-  grid-template-columns: max-content 1fr;
+    display: grid;
+    grid-template-columns: max-content 1fr;
 }

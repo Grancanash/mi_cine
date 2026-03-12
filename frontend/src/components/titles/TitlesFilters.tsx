@@ -82,28 +82,24 @@ function TitlesFilters({openFilter, setOpenFilter, categories, status, filterSta
                                 </div>
                             </div>
                         </div>
-                        <div className="flex-1 flex flex-col gap-2">
+                        <div className="flex-1 flex">
                             {/* ------------------------------------- Filtro Tipo */}
-                            <div className="flex-1 flex md:justify-center items-center">
-                                <div>
-                                    <div className="join bg-base-200 rounded-box w-fit mx-auto">
-                                        <button
-                                            className={`btn join-item ${type === "" ? "btn-active" : ""}`}
-                                            onClick={(e) => changeInputType(e, '')}>
-                                            Todo
-                                        </button>
-                                        <button
-                                            className={`btn join-item ${type === "series" ? "btn-active" : ""}`}
-                                            onClick={(e) => changeInputType(e, "series")}>
-                                            Series
-                                        </button>
-                                        <button
-                                            className={`btn join-item ${type === "movie" ? "btn-active" : ""}`}
-                                            onClick={(e) => changeInputType(e, "movie")}>
-                                            Películas
-                                        </button>
-                                    </div>
-                                </div>
+                            <div className="flex-1 flex md:justify-center items-center gap-1">
+                                <button
+                                    className={`btn bg-transparent join-item ${type === "" ? "btn-active" : ""}`}
+                                    onClick={(e) => changeInputType(e, '')}>
+                                    Todo
+                                </button>
+                                <button
+                                    className={`btn bg-transparent join-item ${type === "series" ? "btn-active" : ""}`}
+                                    onClick={(e) => changeInputType(e, "series")}>
+                                    Series
+                                </button>
+                                <button
+                                    className={`btn bg-transparent join-item ${type === "movie" ? "btn-active" : ""}`}
+                                    onClick={(e) => changeInputType(e, "movie")}>
+                                    Películas
+                                </button>
                             </div>
                         </div>
                     </div>

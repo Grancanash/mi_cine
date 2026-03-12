@@ -26,7 +26,7 @@ function Title({title}:{title:TitleType}) {
                     <div className="collapse-title font-semibold flex flex-col md:flex-row align-middle pointer-events-none z-10">
 
                         {/* ------------------------------------------- TÍTULO */}
-                        <div className="text-lg flex-11 flex items-center">{title.name} ({title.year})</div>
+                        <div className="text-lg font-normal flex-11 flex items-center">{title.name} ({title.year})</div>
 
                         <div className="flex">
                             {/* ------------------------------------------- VALORACIÓN */}

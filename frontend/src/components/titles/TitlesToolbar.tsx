@@ -54,27 +54,27 @@ function TitlesToolbar({order, setOrder, total, setDebouncedSearch, loaderMainRe
 
                 {/* ---------------------------------------------------- ORDEN */}
                 <div className="text-end order-titles flex flex-wrap gap-1 bg-white p-4 md:p-0 md:bg-transparent">
-                    <div className={`btn font-light badge badge-secondary ${order === "-created_at" ? "" : "badge-outline" } hover:bg-secondary hover:text-secondary-content`}
+                    <div className={`btn btn-xs border-gray-500 font-light bg-transparent ${order === "-created_at" ? "" : "badge-outline" } `}
                         onClick={() => setOrder("-created_at")}>
                         + Recientes
                     </div>
-                    <div className={`btn font-light badge badge-secondary ${order === "created_at" ? "" : "badge-outline"} hover:bg-secondary hover:text-secondary-content`}
+                    <div className={`btn btn-xs border-gray-500 font-light bg-transparent ${order === "created_at" ? "" : "badge-outline"} `}
                         onClick={() => setOrder("created_at")}>
                         + Antiguas
                     </div>
-                    <div className={`btn font-light badge badge-secondary ${order === "name" ? "" : "badge-outline"} hover:bg-secondary hover:text-secondary-content`}
+                    <div className={`btn btn-xs border-gray-500 font-light bg-transparent ${order === "name" ? "" : "badge-outline"} `}
                         onClick={() => setOrder("name")}>
                         A..Z
                     </div>
-                    <div className={`btn font-light badge badge-secondary ${order === "-name" ? "" : "badge-outline"} hover:bg-secondary hover:text-secondary-content`}
+                    <div className={`btn btn-xs border-gray-500 font-light bg-transparent ${order === "-name" ? "" : "badge-outline"} `}
                         onClick={() => setOrder("-name")}>
                         Z..A
                     </div>
-                    <div className={`btn font-light badge badge-secondary ${order === "-year" ? "" : "badge-outline"} hover:bg-secondary hover:text-secondary-content gap-1`}
+                    <div className={`btn btn-xs border-gray-500 font-light bg-transparent ${order === "-year" ? "" : "badge-outline"}  gap-1`}
                         onClick={() => setOrder("-year")}>
                         Estreno <ArrowDownIcon />
                     </div>
-                    <div className={`btn font-light badge badge-secondary ${order === "year" ? "" : "badge-outline"} hover:bg-secondary hover:text-secondary-content gap-1`}
+                    <div className={`btn btn-xs border-gray-500 font-light bg-transparent ${order === "year" ? "" : "badge-outline"}  gap-1`}
                         onClick={() => setOrder("year")}>
                         Estreno <ArrowUpIcon />
                     </div>
@@ -101,10 +101,10 @@ function TitlesToolbar({order, setOrder, total, setDebouncedSearch, loaderMainRe
                 </div>
                 {/* ---------------------------------------------------- BOTONES FILTROS / AÑADIR TÍTULO */}
                 <div className="flex justify-end items-center gap-1">
-                    <button id="btn-filter" className="btn bg-secondary text-white hover:bg-secondary font-light" data-target="filters-collapse" onClick={showFilters}>
+                    <button id="btn-filter" className="btn border-gray-400 bg-transparent font-normal" data-target="filters-collapse" onClick={showFilters}>
                         Filtros
                     </button>
-                    <Link to="/titles/new" className="btn bg-secondary text-white hover:bg-secondary font-light">Nuevo</Link>
+                    <Link to="/titles/new" className="btn bg-primary text-white font-normal">Nuevo</Link>
                     <div className="total-titles whitespace-nowrap pl-4 md:px-4 flex-1 md:hidden">
                         {total} título{total !== 1 ? "s" : ""}
                     </div>

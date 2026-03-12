@@ -13,7 +13,7 @@ function Title({actor}:{actor:ActorType}) {
                     <div className="collapse-title font-semibold flex flex-col md:flex-row align-middle pointer-events-none z-10">
 
                         {/* ------------------------------------------- TÍTULO */}
-                        <div className="text-lg flex-11 flex items-center">{actor.name}</div>
+                        <div className="text-lg font-normal flex-11 flex items-center">{actor.name}</div>
 
                         <div className="flex">
                             {/* ------------------------------------------- EDICIÓN */}
