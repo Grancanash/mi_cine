@@ -32,10 +32,15 @@ function TitlesPage() {
     const [ready, setReady] = useState(false);
     const [queryVersion, setQueryVersion] = useState(0);
 
+    const initRef = useRef(false);
+
     // -------------------------------------------------------------------
     // 1) CARGA INICIAL: catálogos + primer fetch de títulos (con querystring)
     // -------------------------------------------------------------------
     useEffect(() => {
+        if (initRef.current) return;
+        initRef.current = true;
+
         (async () => {
             try {
                 setLoading(true);
@@ -86,7 +91,7 @@ function TitlesPage() {
                 setLoading(false);
             }
         })();
-    }, []);
+    }, [searchParams, filterType, order, debouncedSearch, filterCategories]);
 
     // -------------------------------------------------------------------
     // 2) REFETCH de página 1 cuando el usuario cambia orden/búsqueda/filtros
@@ -159,9 +164,6 @@ function TitlesPage() {
         setQueryVersion((v) => v + 1);
     };
 
-    
-
-
     // -------------------------------------------------------------------
     // 3) INFINITE SCROLL (page + 1)
     // -------------------------------------------------------------------
@@ -230,7 +232,7 @@ function TitlesPage() {
     }, []);
 
     return (
-        <div className="max-w-250 mx-auto py-5">
+        <div className="max-w-250 mx-auto md:py-5">
             <TitlesToolbar
                 order={order}
                 setOrder={handleChangeOrder}

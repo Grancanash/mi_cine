@@ -48,76 +48,75 @@ function TitlesToolbar({order, setOrder, total, setDebouncedSearch, loaderMainRe
     }, []);
 
     return(
-        <>
-        <div className="flex flex-col md:flex-row justify-between md:mb-4 gap-4 items-center">
-            <h1 className="text-3xl font-bold my-4 md:my-0 md:py-0 ">Mis Títulos</h1>
+        <div className="md:px-0">
+            <div className="flex flex-col md:flex-row justify-between md:mb-4 md:gap-4 items-center">
+                <h1 className="text-2xl font-bold md:py-0 p-3">Mis Títulos</h1>
 
-            {/* ---------------------------------------------------- ORDEN */}
-            <div className="text-end order-titles flex flex-wrap gap-1">
-                <div className={`btn font-light badge badge-primary ${order === "-created_at" ? "" : "badge-outline" } hover:bg-primary hover:text-primary-content`}
-                    onClick={() => setOrder("-created_at")}>
-                    + Recientes
+                {/* ---------------------------------------------------- ORDEN */}
+                <div className="text-end order-titles flex flex-wrap gap-1 bg-white p-4 md:p-0 md:bg-transparent">
+                    <div className={`btn font-light badge badge-primary ${order === "-created_at" ? "" : "badge-outline" } hover:bg-primary hover:text-primary-content`}
+                        onClick={() => setOrder("-created_at")}>
+                        + Recientes
+                    </div>
+                    <div className={`btn font-light badge badge-primary ${order === "created_at" ? "" : "badge-outline"} hover:bg-primary hover:text-primary-content`}
+                        onClick={() => setOrder("created_at")}>
+                        + Antiguas
+                    </div>
+                    <div className={`btn font-light badge badge-primary ${order === "name" ? "" : "badge-outline"} hover:bg-primary hover:text-primary-content`}
+                        onClick={() => setOrder("name")}>
+                        A..Z
+                    </div>
+                    <div className={`btn font-light badge badge-primary ${order === "-name" ? "" : "badge-outline"} hover:bg-primary hover:text-primary-content`}
+                        onClick={() => setOrder("-name")}>
+                        Z..A
+                    </div>
+                    <div className={`btn font-light badge badge-primary ${order === "-year" ? "" : "badge-outline"} hover:bg-primary hover:text-primary-content gap-1`}
+                        onClick={() => setOrder("-year")}>
+                        Estreno <ArrowDownIcon />
+                    </div>
+                    <div className={`btn font-light badge badge-primary ${order === "year" ? "" : "badge-outline"} hover:bg-primary hover:text-primary-content gap-1`}
+                        onClick={() => setOrder("year")}>
+                        Estreno <ArrowUpIcon />
+                    </div>
                 </div>
-                <div className={`btn font-light badge badge-primary ${order === "created_at" ? "" : "badge-outline"} hover:bg-primary hover:text-primary-content`}
-                    onClick={() => setOrder("created_at")}>
-                    + Antiguas
+            </div>
+            
+            <div className="flex flex-col md:flex-row justify-between gap-4 bg-white md:bg-transparent md:items-center p-4 md:p-0">
+
+                {/* ---------------------------------------------------- BUSCAR TÍTULO */}
+                <div className="flex flex-col md:flex-row items-center md:w-200">
+                    <label className="input w-full md:flex-10">
+                        <SearchIcon />
+                        {/* <input type="search" placeholder="Buscar" id="titleSearchInput" onChange={(e) => setSearch(e.target.value)} /> */}
+                        <input type="search" placeholder="Buscar" id="titleSearchInput" onChange={handleChangeInput} />
+                    </label>
+                    <div className="total-titles whitespace-nowrap px-4 flex-1 hidden md:block">
+                        {total} título{total !== 1 ? "s" : ""}
+                    </div>
+                    <div ref={loaderMainRef} className="hidden md:flex py-4 flex-1 p-0 h-20">
+                        {loading ? (
+                        <span className="loading loading-spinner loading-xs" />
+                        ) : null }
+                    </div>
                 </div>
-                <div className={`btn font-light badge badge-primary ${order === "name" ? "" : "badge-outline"} hover:bg-primary hover:text-primary-content`}
-                    onClick={() => setOrder("name")}>
-                    A..Z
-                </div>
-                <div className={`btn font-light badge badge-primary ${order === "-name" ? "" : "badge-outline"} hover:bg-primary hover:text-primary-content`}
-                    onClick={() => setOrder("-name")}>
-                    Z..A
-                </div>
-                <div className={`btn font-light badge badge-primary ${order === "-year" ? "" : "badge-outline"} hover:bg-primary hover:text-primary-content gap-1`}
-                    onClick={() => setOrder("-year")}>
-                    Estreno <ArrowDownIcon />
-                </div>
-                <div className={`btn font-light badge badge-primary ${order === "year" ? "" : "badge-outline"} hover:bg-primary hover:text-primary-content gap-1`}
-                    onClick={() => setOrder("year")}>
-                    Estreno <ArrowUpIcon />
+                {/* ---------------------------------------------------- BOTONES FILTROS / AÑADIR TÍTULO */}
+                <div className="flex justify-end items-center gap-1">
+                    <button id="btn-filter" className="btn btn-primary" data-target="filters-collapse"
+                        onClick={showFilters}>
+                        Filtros
+                    </button>
+                    <Link to="/titles/new" className="btn btn-primary">Nuevo</Link>
+                    <div className="total-titles whitespace-nowrap pl-4 md:px-4 flex-1 md:hidden">
+                        {total} título{total !== 1 ? "s" : ""}
+                    </div>
+                    <div ref={loaderMainRef} className="md:hidden md:py-4 flex-1 p-0 md:h-20">
+                        {loading ? (
+                        <span className="loading loading-spinner loading-xs" />
+                        ) : null }
+                    </div>
                 </div>
             </div>
         </div>
-
-        
-        <div className="flex flex-col md:flex-row justify-between gap-4 md:items-center mt-4 md:mt-0 mb-3 md:mb-0">
-
-            {/* ---------------------------------------------------- BUSCAR TÍTULO */}
-            <div className="flex flex-col md:flex-row items-center md:w-200">
-                <label className="input w-full md:flex-10">
-                    <SearchIcon />
-                    {/* <input type="search" placeholder="Buscar" id="titleSearchInput" onChange={(e) => setSearch(e.target.value)} /> */}
-                    <input type="search" placeholder="Buscar" id="titleSearchInput" onChange={handleChangeInput} />
-                </label>
-                <div className="total-titles whitespace-nowrap px-4 flex-1 hidden md:block">
-                    {total} título{total !== 1 ? "s" : ""}
-                </div>
-                <div ref={loaderMainRef} className="hidden md:flex py-4 flex-1 p-0 h-20">
-                    {loading ? (
-                    <span className="loading loading-spinner loading-xs" />
-                    ) : null }
-                </div>
-            </div>
-            {/* ---------------------------------------------------- BOTONES FILTROS / AÑADIR TÍTULO */}
-            <div className="flex justify-end items-center gap-1">
-                <button id="btn-filter" className="btn btn-primary" data-target="filters-collapse"
-                    onClick={showFilters}>
-                    Filtros
-                </button>
-                <Link to="/titles/new" className="btn btn-primary">Nuevo</Link>
-                <div className="total-titles whitespace-nowrap pl-4 md:px-4 flex-1 md:hidden">
-                    {total} título{total !== 1 ? "s" : ""}
-                </div>
-                <div ref={loaderMainRef} className="md:hidden md:py-4 flex-1 p-0 md:h-20">
-                    {loading ? (
-                    <span className="loading loading-spinner loading-xs" />
-                    ) : null }
-                </div>
-            </div>
-        </div>
-        </>
     );
 }
 

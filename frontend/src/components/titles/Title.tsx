@@ -19,7 +19,7 @@ function Title({title}:{title:TitleType}) {
     }, [title.tracking]);
 
     return (
-        <li className="list-row p-0 md:px-4 flex">
+        <li className="list-row p-0 md:px-4 flex rounded-none md:rounded">
             <div className="flex-11">
                 <div className="collapse collapse-arrow bg-base-100">
                     <input type="checkbox" />

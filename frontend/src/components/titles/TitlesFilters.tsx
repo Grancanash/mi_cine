@@ -53,14 +53,14 @@ function TitlesFilters({openFilter, setOpenFilter, categories, status, filterSta
                     <div className="mb-4">
                         <p className="m-0! font-bold">Filtrar por:</p>
                     </div>
-                    <div className="flex gap-2">
+                    <div className="flex flex-col-reverse md:flex-row gap-2">
                         <div className="flex-1 flex flex-col gap-2">
                             {/* ------------------------------------- Filtro Categorías */}
-                            <div className="flex-1 flex justify-end items-center gap-2">
-                                <div className="text-end">
-                                    <label className="label">Género:</label>
+                            <div className="flex-1 flex md:justify-end items-center gap-2">
+                                <div className="flex-1 text-end">
+                                    <label className="label">Géneros:</label>
                                 </div>
-                                <div>
+                                <div className="flex-5">
                                     <Select isMulti name="categories" options={categories} className="basic-multi-select md:w-100" classNamePrefix="select"
                                         onMenuOpen={() => setOpenFilter(true)}
                                         onMenuClose={() => setOpenFilter(false)}
@@ -68,12 +68,12 @@ function TitlesFilters({openFilter, setOpenFilter, categories, status, filterSta
                                     />
                                 </div>
                             </div>
-                            <div className="flex-1 flex justify-end items-center gap-2">
+                            <div className="flex-1 flex md:justify-end items-center gap-2">
                                 {/* ------------------------------------- Filtro Status */}
-                                <div className="text-end">
+                                <div className="flex-1 text-end">
                                     <label className="label">Estado:</label>
                                 </div>
-                                <div>
+                                <div className="flex-5">
                                     <Select isMulti name="status" options={status} value={statusValue} className="basic-multi-select md:w-100" classNamePrefix="select"
                                         onMenuOpen={() => setOpenFilter(true)}
                                         onMenuClose={() => setOpenFilter(false)}
@@ -84,7 +84,7 @@ function TitlesFilters({openFilter, setOpenFilter, categories, status, filterSta
                         </div>
                         <div className="flex-1 flex flex-col gap-2">
                             {/* ------------------------------------- Filtro Tipo */}
-                            <div className="flex-1 flex justify-center items-center">
+                            <div className="flex-1 flex md:justify-center items-center">
                                 <div>
                                     <div className="join bg-base-200 rounded-box w-fit mx-auto">
                                         <button
