@@ -3,6 +3,7 @@ import type { SyntheticEvent } from "react";
 import { getCookie } from "../../../utils/cookies";
 import { handleAxiosError } from "../../../api/client";
 import { CONFIG } from "../../../constants";
+import logo from '@/assets/img/logo.png';
 
 interface Props {
   onLoggedIn: () => void;
@@ -47,11 +48,10 @@ const LoginForm = ({ onLoggedIn }: Props) => {
 
   return (
     <div className="min-h-screen bg-base-200 flex items-center justify-center">
-      <div className="w-full max-w-md bg-base-100 shadow-xl rounded-lg p-8">
-        <h1 className="text-3xl font-bold mb-6 text-center">
-          Iniciar sesión
-        </h1>
-        <form className="space-y-4 max-w-sm mx-auto" onSubmit={handleSubmit}>
+      <div className="w-full h-screen md:h-[inherit] md:max-w-md bg-base-100 shadow-xl md:rounded-lg p-8 flex flex-col gap-4">
+        <img src={logo} alt="Logo - Mi Cine" className="" />
+        <h1 className="m-0! pt-8 text-3xl mb-6 text-center">Iniciar sesión</h1>
+        <form className="m-0! space-y-4 max-w-sm mx-auto" onSubmit={handleSubmit}>
           <div className="form-control">
             <label className="label">
               <span className="label-text">Usuario</span>

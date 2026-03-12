@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import logo from '../../assets/img/mi_cine.png'
+import logo from '@/assets/img/logo.png'
 
 function Navbar({isLoggedIn, onLogout}: {isLoggedIn: boolean, onLogout: () => void}) {
     return(
