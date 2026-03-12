@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import type { TitlesResponse } from "../../types/TitlesResponse";
-import api from "../../api/client";
+import api, { handleAxiosError } from "../../api/client";
 import type { Title as TitleType } from "../../types/Title";
 import TitlesList from "../titles/TitlesList";
 
@@ -64,10 +64,8 @@ function Dashboard() {
                 setTitlesRecent(titlesDataRecents.results.slice(0, 10));
                 setTitlesWatching(titlesDataWatching.results.slice(0, 10));
                 setTitlesPending(titlesDataPending.results.slice(0, 10));
-            } catch (err: any) {
-                setError(
-                    err?.response?.data?.message || "Error en la carga inicial"
-                );
+            } catch (err: unknown) {
+                handleAxiosError(err, setError, "Error en la carga inicial");
             } finally {
                 setLoading(false);
             }

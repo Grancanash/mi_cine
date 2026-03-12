@@ -165,7 +165,7 @@ function ActorsPage() {
     }, []);
 
     return (
-        <div className="max-w-250 mx-auto py-5">
+        <div className="max-w-250 mx-auto md:py-5">
             <ActorsToolbar
                 order={order}
                 setOrder={handleChangeOrder}

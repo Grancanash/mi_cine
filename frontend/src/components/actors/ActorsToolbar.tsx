@@ -39,11 +39,11 @@ function TitlesToolbar({order, setOrder, total, setDebouncedSearch, loaderMainRe
 
     return(
         <>
-        <div className="flex flex-col md:flex-row justify-between md:mb-4 gap-4 items-center">
-            <h1 className="text-3xl font-bold my-4 md:my-0 md:py-0 ">Actores</h1>
+        <div className="flex flex-col md:flex-row justify-between md:mb-4 md:gap-4 items-center">
+            <h1 className="text-2xl font-bold md:my-0 md:py-0 p-3">Actores</h1>
 
             {/* ---------------------------------------------------- ORDEN */}
-            <div className="text-end order-titles flex flex-wrap gap-1">
+            <div className="text-end order-titles flex flex-wrap gap-1 bg-white p-4 md:p-0 md:bg-transparent w-full md:w-auto">
                 <div className={`btn font-light badge badge-primary ${order === "name" ? "" : "badge-outline"} hover:bg-primary hover:text-primary-content`}
                     onClick={() => setOrder("name")}>
                     A..Z
@@ -55,9 +55,7 @@ function TitlesToolbar({order, setOrder, total, setDebouncedSearch, loaderMainRe
             </div>
         </div>
 
-        
-        <div className="flex flex-col md:flex-row justify-between gap-4 md:items-center mt-4 md:mt-0 mb-3 md:mb-0">
-
+        <div className="flex flex-col md:flex-row justify-between gap-4 md:items-center p-4 md:p-0 bg-white md:bg-transparent">
             {/* ---------------------------------------------------- BUSCAR TÍTULO */}
             <div className="flex flex-col md:flex-row items-center md:w-200">
                 <label className="input w-full md:flex-10">

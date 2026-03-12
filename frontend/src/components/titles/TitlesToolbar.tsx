@@ -50,7 +50,7 @@ function TitlesToolbar({order, setOrder, total, setDebouncedSearch, loaderMainRe
     return(
         <div className="md:px-0">
             <div className="flex flex-col md:flex-row justify-between md:mb-4 md:gap-4 items-center">
-                <h1 className="text-2xl font-bold md:py-0 p-3">Mis Títulos</h1>
+                <h1 className="text-2xl font-bold md:py-0 p-3">Mi Lista</h1>
 
                 {/* ---------------------------------------------------- ORDEN */}
                 <div className="text-end order-titles flex flex-wrap gap-1 bg-white p-4 md:p-0 md:bg-transparent">
@@ -81,7 +81,7 @@ function TitlesToolbar({order, setOrder, total, setDebouncedSearch, loaderMainRe
                 </div>
             </div>
             
-            <div className="flex flex-col md:flex-row justify-between gap-4 bg-white md:bg-transparent md:items-center p-4 md:p-0">
+            <div className="flex flex-col md:flex-row justify-between gap-4 md:items-center p-4 md:p-0 bg-white md:bg-transparent">
 
                 {/* ---------------------------------------------------- BUSCAR TÍTULO */}
                 <div className="flex flex-col md:flex-row items-center md:w-200">
