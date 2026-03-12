@@ -76,13 +76,13 @@ function Dashboard() {
     
     return (
         <div className="max-w-250 mx-auto">
-            <div className="container mx-auto py-5">
-                <h1 className="text-3xl font-bold mb-6 text-center md:text-left">
+            <div className="container mx-auto md:py-5">
+                <h1 className="text-2xl font-bold md:mb-6 text-center md:text-left p-3">
                     Bienvenido a Mi Cine
                 </h1>
-                <div className="grid gap-6 md:grid-cols-2">
+                <div className="grid md:gap-6 md:grid-cols-2 ">
 
-                    <div className="card bg-base-100 shadow-xl">
+                    <div className="card bg-base-100 shadow-xl rounded-none md:rounded md:border-0 border-b border-gray-300">
                         <div className="card-body">
                             <h2 className="card-title">Últimos añadidos</h2>
                             <TitlesList titles={titlesRecent} total={10} hasMore={hasMore} error={error} loaderInfiniteScrollRef={loaderInfiniteScrollRef} loading={loading} typeList="sm" />
@@ -90,7 +90,7 @@ function Dashboard() {
                         </div>
                     </div>
 
-                    <div className="card bg-base-100 shadow-xl">
+                    <div className="card bg-base-100 shadow-xl rounded-none md:rounded">
                         <div className="card-body">
                             <h2 className="card-title">En progreso</h2>
                             <TitlesList titles={titlesWatching} total={10} hasMore={hasMore} error={error} loaderInfiniteScrollRef={loaderInfiniteScrollRef} loading={loading} typeList="sm" />
@@ -98,7 +98,7 @@ function Dashboard() {
                         </div>
                     </div>
 
-                    <div className="card bg-base-100 shadow-xl">
+                    <div className="card bg-base-100 shadow-xl rounded-none md:rounded">
                         <div className="card-body">
                             <h2 className="card-title">Por ver</h2>
                             <TitlesList titles={titlesPending} total={10} hasMore={hasMore} error={error} loaderInfiniteScrollRef={loaderInfiniteScrollRef} loading={loading} typeList="sm" />

@@ -10,7 +10,7 @@ function Layout({ isLoggedIn, onLogout, children }: { isLoggedIn: boolean; onLog
 
       {/* CONTENIDO PRINCIPAL */}
       <main className="flex-1">
-        <div className="container mx-auto py-4">{children}</div>
+        <div className="container mx-auto">{children}</div>
       </main>
 
       {/* FOOTER */}
