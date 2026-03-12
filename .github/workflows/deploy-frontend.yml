@@ -31,6 +31,5 @@ jobs:
             npm run build && \
             mkdir -p /var/www/mi_cine/frontend_dist && \
             rm -rf /var/www/mi_cine/frontend_dist/* && \
-            cp -r dist/* /var/www/mi_cine/frontend_dist/ && \
-            systemctl reload nginx || echo 'no nginx reload'
+            cp -r dist/* /var/www/mi_cine/frontend_dist/
           "
