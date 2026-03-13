@@ -191,6 +191,7 @@ REST_FRAMEWORK = {
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
+    'https://development-chose-proposed-winning.trycloudflare.com',
 ]
 
 CORS_ALLOW_CREDENTIALS = True
@@ -200,6 +201,7 @@ CSRF_TRUSTED_ORIGINS = [
     "http://217.154.178.102",
     "http://localhost:5173",  # si lo sigues usando
     "http://127.0.0.1:5173",
+    'https://development-chose-proposed-winning.trycloudflare.com',
 ]
 
 # test deploy backend
