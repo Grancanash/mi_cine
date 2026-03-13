@@ -26,7 +26,7 @@ SECRET_KEY = "cKIWaS2QksAdluW7oxBe3motKuXZ3cw9YeFfsKeNnuwbxXfOl3mtB3dQSlY3zI32zd
 DEBUG = False
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '217.154.178.102',
-                 'https://' + 'development-chose-proposed-winning.trycloudflare.com']
+                 'development-chose-proposed-winning.trycloudflare.com']
 
 
 # Application definition
