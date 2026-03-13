@@ -26,7 +26,6 @@ function AppInner() {
                 return;
             }
             const data = await res.json();
-            console.log(data)
             setIsLoggedIn(data.is_authenticated === true);
         })
         .catch((err) => {
