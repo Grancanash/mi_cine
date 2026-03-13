@@ -25,7 +25,7 @@ SECRET_KEY = "cKIWaS2QksAdluW7oxBe3motKuXZ3cw9YeFfsKeNnuwbxXfOl3mtB3dQSlY3zI32zd
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '217.154.178.102', 'https://oven-relying-addressed-puerto.trycloudflare.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '217.154.178.102', 'oven-relying-addressed-puerto.trycloudflare.com']
 
 
 # Application definition
