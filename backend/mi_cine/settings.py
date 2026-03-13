@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,8 +26,10 @@ SECRET_KEY = "cKIWaS2QksAdluW7oxBe3motKuXZ3cw9YeFfsKeNnuwbxXfOl3mtB3dQSlY3zI32zd
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '217.154.178.102',
-                 'development-chose-proposed-winning.trycloudflare.com']
+# Esto permite que Django use la URL que le pases por fuera
+CLOUDFLARE_URL = os.getenv('CLOUDFLARE_URL', 'localhost')
+
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '217.154.178.102', CLOUDFLARE_URL]
 
 # Application definition
 
@@ -191,7 +194,7 @@ REST_FRAMEWORK = {
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
-    'https://development-chose-proposed-winning.trycloudflare.com',
+    f"https://{CLOUDFLARE_URL}"
 ]
 
 CORS_ALLOW_CREDENTIALS = True
@@ -201,7 +204,7 @@ CSRF_TRUSTED_ORIGINS = [
     "http://217.154.178.102",
     "http://localhost:5173",  # si lo sigues usando
     "http://127.0.0.1:5173",
-    'https://development-chose-proposed-winning.trycloudflare.com',
+    f"https://{CLOUDFLARE_URL}"
 ]
 
 # test deploy backend
