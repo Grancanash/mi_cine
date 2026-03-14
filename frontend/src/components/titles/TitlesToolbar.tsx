@@ -14,6 +14,15 @@ type TitlesToolbarProps = {
     setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
+const getBtnClass = (currentOrder: string, targetOrder: string) => {
+    const baseClass = "btn btn-xs border-gray-500 font-normal bg-transparent";
+    const activeClass = "btn-active bg-gray-500! text-white";
+
+    const inactiveClass = "badge-outline opacity-70 hover:opacity-100";
+    
+    return `${baseClass} ${currentOrder === targetOrder ? activeClass : inactiveClass}`;
+};
+
 function TitlesToolbar({order, setOrder, total, setDebouncedSearch, loaderMainRef, loading, setLoading}: TitlesToolbarProps) {
     const timeoutRef = useRef<number | null>(null);
 
@@ -47,6 +56,9 @@ function TitlesToolbar({order, setOrder, total, setDebouncedSearch, loaderMainRe
         };
     }, []);
 
+
+
+
     return(
         <div className="md:px-0">
             <div className="flex flex-col md:flex-row justify-between md:gap-4 items-center">
@@ -54,28 +66,22 @@ function TitlesToolbar({order, setOrder, total, setDebouncedSearch, loaderMainRe
 
                 {/* ---------------------------------------------------- ORDEN */}
                 <div className="text-end order-titles flex flex-wrap gap-1 bg-white p-4 md:p-0 md:bg-transparent">
-                    <div className={`btn btn-xs border-gray-500 font-light bg-transparent ${order === "-created_at" ? "" : "badge-outline" } `}
-                        onClick={() => setOrder("-created_at")}>
+                    <div className={getBtnClass(order, "-created_at")} onClick={() => setOrder("-created_at")}>
                         + Recientes
                     </div>
-                    <div className={`btn btn-xs border-gray-500 font-light bg-transparent ${order === "created_at" ? "" : "badge-outline"} `}
-                        onClick={() => setOrder("created_at")}>
+                    <div className={getBtnClass(order, "created_at")} onClick={() => setOrder("created_at")}>
                         + Antiguas
                     </div>
-                    <div className={`btn btn-xs border-gray-500 font-light bg-transparent ${order === "name" ? "" : "badge-outline"} `}
-                        onClick={() => setOrder("name")}>
+                    <div className={getBtnClass(order, "name")} onClick={() => setOrder("name")}>
                         A..Z
                     </div>
-                    <div className={`btn btn-xs border-gray-500 font-light bg-transparent ${order === "-name" ? "" : "badge-outline"} `}
-                        onClick={() => setOrder("-name")}>
+                    <div className={getBtnClass(order, "-name")} onClick={() => setOrder("-name")}>
                         Z..A
                     </div>
-                    <div className={`btn btn-xs border-gray-500 font-light bg-transparent ${order === "-year" ? "" : "badge-outline"}  gap-1`}
-                        onClick={() => setOrder("-year")}>
+                    <div className={getBtnClass(order, "-year")} onClick={() => setOrder("-year")}>
                         Estreno <ArrowDownIcon />
                     </div>
-                    <div className={`btn btn-xs border-gray-500 font-light bg-transparent ${order === "year" ? "" : "badge-outline"}  gap-1`}
-                        onClick={() => setOrder("year")}>
+                    <div className={getBtnClass(order, "year")} onClick={() => setOrder("year")}>
                         Estreno <ArrowUpIcon />
                     </div>
                 </div>
@@ -101,7 +107,7 @@ function TitlesToolbar({order, setOrder, total, setDebouncedSearch, loaderMainRe
                 </div>
                 {/* ---------------------------------------------------- BOTONES FILTROS / AÑADIR TÍTULO */}
                 <div className="flex justify-end items-center gap-1">
-                    <button id="btn-filter" className="btn border-gray-400 bg-transparent font-normal" data-target="filters-collapse" onClick={showFilters}>
+                    <button type="button" id="btn-filter" className="btn border-gray-400 font-normal" data-target="filters-collapse" onClick={showFilters}>
                         Filtros
                     </button>
                     <Link to="/titles/new" className="btn bg-primary text-white font-normal">Nuevo</Link>

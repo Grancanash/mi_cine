@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import type { Title as TitleType } from "../../types/Title";
 import TitleDetail from "./TitleDetail";
 import { Link } from "react-router-dom";
@@ -6,29 +5,26 @@ import EditIcon from "../icons/EditIcon";
 
 function Title({title}:{title:TitleType}) {
 
-    const [rating, setRating] = useState(0);
-
+    const rating = title.tracking?.rating ?? 0;
     const halves = Array.from({ length: 10 }, (_, i) => i + 1);
-
-    useEffect(() => {
-        const tracking = title.tracking;
-
-        if (tracking && tracking.rating != null) {
-            setRating(tracking.rating);
-        }
-    }, [title.tracking]);
 
     return (
         <li className="list-row p-0 md:px-4 flex rounded-none md:rounded">
             <div className="flex-11">
                 <div className="collapse collapse-arrow bg-base-100">
-                    <input type="checkbox" />
-                    <div className="collapse-title font-semibold flex flex-col md:flex-row align-middle pointer-events-none z-10">
+                    {/* <input type="checkbox" /> */}
+                    <input 
+                        type="checkbox" 
+                        className="absolute inset-0 w-full h-25 md:h-full z-20 cursor-pointer opacity-0" 
+                        style={{ height: 'var(--title-height, 100px)' }}
+                    />
+                    <div className="collapse-title font-semibold flex flex-col md:flex-row align-middle">
 
                         {/* ------------------------------------------- TÍTULO */}
                         <div className="text-lg font-normal flex-11 flex items-center">{title.name} ({title.year})</div>
 
                         <div className="flex">
+                            
                             {/* ------------------------------------------- VALORACIÓN */}
                             <div className="rating rating-xs rating-half h-12 flex items-center">
                                 <input type="radio" name="rating" className="rating-hidden" />
@@ -43,12 +39,17 @@ function Title({title}:{title:TitleType}) {
                             </div>
 
                             {/* ------------------------------------------- EDICIÓN */}
-                            <div className="flex-1 flex items-center">
+                            {/* <div className="flex-1 flex items-center z-30">
                                 <div>
                                     <Link to={`/titles/${title.id}`} className="btn-title-update btn btn-square btn-ghost hover:bg-transparent hover:border-transparent pointer-events-auto z-20" title="Editar">
                                         <EditIcon />
                                     </Link>
                                 </div>
+                            </div> */}
+                            <div className="relative z-30">
+                                <Link to={`/titles/${title.id}`} className="btn btn-square btn-ghost" onClick={(e) => e.stopPropagation()}>
+                                    <EditIcon />
+                                </Link>
                             </div>
                         </div>
 

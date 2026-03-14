@@ -14,7 +14,6 @@ import { CONFIG } from "../constants";
 function AppInner() {
     const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
     const location = useLocation();
-
     useEffect(() => {
         fetch(CONFIG.API_URL + "/session/", {
             method: "GET",

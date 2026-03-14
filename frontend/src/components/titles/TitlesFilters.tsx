@@ -15,6 +15,13 @@ type TitlesFiltersProp = {
     setFilterType: (value: string) => void;
 }
 
+const getTypeBtnClass = (currentType: string, targetType: string) => {
+    const baseClass = "btn bg-transparent join-item font-normal";
+    const activeClass = "btn-active bg-gray-500! border-gray-500! text-white border-primary";
+    
+    return `${baseClass} ${currentType === targetType ? activeClass : ""}`;
+};
+
 function TitlesFilters({openFilter, setOpenFilter, categories, status, filterStatus, setFilterStatus, setFilterCategories, setFilterType}: TitlesFiltersProp) {
 
     const [type, setType] = useState('');
@@ -85,19 +92,13 @@ function TitlesFilters({openFilter, setOpenFilter, categories, status, filterSta
                         <div className="flex-1 flex">
                             {/* ------------------------------------- Filtro Tipo */}
                             <div className="flex-1 flex md:justify-center items-center gap-1">
-                                <button
-                                    className={`btn bg-transparent join-item ${type === "" ? "btn-active" : ""}`}
-                                    onClick={(e) => changeInputType(e, '')}>
+                                <button className={getTypeBtnClass(type, '')} onClick={(e) => changeInputType(e, '')}>
                                     Todo
                                 </button>
-                                <button
-                                    className={`btn bg-transparent join-item ${type === "series" ? "btn-active" : ""}`}
-                                    onClick={(e) => changeInputType(e, "series")}>
+                                <button className={getTypeBtnClass(type, 'series')} onClick={(e) => changeInputType(e, "series")}>
                                     Series
                                 </button>
-                                <button
-                                    className={`btn bg-transparent join-item ${type === "movie" ? "btn-active" : ""}`}
-                                    onClick={(e) => changeInputType(e, "movie")}>
+                                <button className={getTypeBtnClass(type, 'movie')} onClick={(e) => changeInputType(e, "movie")}>
                                     Películas
                                 </button>
                             </div>

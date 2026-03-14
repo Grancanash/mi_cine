@@ -1,10 +1,7 @@
-// export const CONFIG = {
-// //   API_URL: 'http://localhost:8000/api',
-//   API_URL: 'http://217.154.178.102/api',
-// } as const;
-//
+const origin = window.location.origin;
+const root = origin.replace(':5173', ':8000');
 
 export const CONFIG = {
-  API_URL: `${window.location.origin}/api`,
-  APP_NAME: 'Mi Cine'
+    API_URL: `${root}/api`,
+    APP_NAME: 'Mi Cine'
 } as const;

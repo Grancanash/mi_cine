@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 import os
 from pathlib import Path
+import socket
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,13 +24,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "cKIWaS2QksAdluW7oxBe3motKuXZ3cw9YeFfsKeNnuwbxXfOl3mtB3dQSlY3zI32zdRocB8HNwIYiryJ"
 
+
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True if socket.gethostname() == 'PC-ASH' else False
 
 # Esto permite que Django use la URL que le pases por fuera
 CLOUDFLARE_URL = os.getenv('CLOUDFLARE_URL', 'localhost')
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '217.154.178.102', CLOUDFLARE_URL]
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    '217.154.178.102',
+    '172.20.47.95',   # IP de WSL
+    '192.168.2.204',  # IP de Windows
+    CLOUDFLARE_URL]
 
 # Application definition
 
@@ -194,6 +202,7 @@ REST_FRAMEWORK = {
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
+    'http://192.168.2.204:5173',  # Ip de casa
     f"https://{CLOUDFLARE_URL}"
 ]
 
@@ -201,9 +210,9 @@ CORS_ALLOW_CREDENTIALS = True
 
 # CSRF (no necesario si usas SessionAuthentication)
 CSRF_TRUSTED_ORIGINS = [
-    "http://217.154.178.102",
-    "http://localhost:5173",  # si lo sigues usando
+    "http://localhost:5173",
     "http://127.0.0.1:5173",
+    'http://192.168.2.204:5173',  # Ip de casa
     f"https://{CLOUDFLARE_URL}"
 ]
 
