@@ -1,20 +1,20 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import type { TitlesResponse } from "../../types/TitlesResponse";
 import api, { handleAxiosError } from "../../api/client";
-import type { Title as TitleType } from "../../types/Title";
-import TitlesList from "../titles/TitlesList";
+// import type { Title as TitleType } from "../../types/Title";
+// import TitlesList from "../titles/TitlesList";
 import BtnAdd from "../ui/BtnAdd";
 
 function Dashboard() {
     const firstLoadRef = useRef(true);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
-    const [titlesRecent, setTitlesRecent] = useState<TitleType[]>([]);
+    // const [titlesRecent, setTitlessetLoadingRecent] = useState<TitleType[]>([]);
     // const [titlesWatching, setTitlesWatching] = useState<TitleType[]>([]);
     // const [titlesPending, setTitlesPending] = useState<TitleType[]>([]);
-    const [hasMore, _setHasMore] = useState(false);
-    const loaderInfiniteScrollRef = useRef<HTMLLIElement | null>(null);
+    // const [hasMore, _setHasMore] = useState(false);
+    // const loaderInfiniteScrollRef = useRef<HTMLLIElement | null>(null);
 
     async function fetchTitlesApi(params: {
             page: number;
@@ -61,23 +61,14 @@ function Dashboard() {
                 //         filterStatus: 'status=pending',
                 //     }),
                 // ]);
-                const [titlesDataRecents] = await Promise.all([
-                    fetchTitlesApi({
-                        page: 1,
-                        order: '-created_at',
-                        search: "",
-                        filterCategories: "",
-                        filterStatus: '',
-                    })
-                ]);
 
-                setTitlesRecent(titlesDataRecents.results.slice(0, 10));
+                // setTitlesRecent(titlesDataRecents.results.slice(0, 10));
                 // setTitlesWatching(titlesDataWatching.results.slice(0, 10));
                 // setTitlesPending(titlesDataPending.results.slice(0, 10));
             } catch (err: unknown) {
                 handleAxiosError(err, setError, "Error en la carga inicial");
             } finally {
-                setLoading(false);
+                // setLoading(false);
             }
         })();
     }, []);
@@ -94,7 +85,7 @@ function Dashboard() {
                     <div className="card bg-base-100 shadow-xl rounded-none md:rounded md:border-0 border-b border-gray-300">
                         <div className="card-body">
                             <h2 className="card-title">Últimos añadidos</h2>
-                            <TitlesList 
+                            {/* <TitlesList 
                                 titles={titlesRecent}
                                 total={15}
                                 hasMore={hasMore}
@@ -103,14 +94,14 @@ function Dashboard() {
                                 loading={loading}
                                 typeList="sm"
                                 enableInfiniteScroll={false} />
-                            <Link to='/titles' className="btn btn-sm btn-primary mt-2">Ver todos</Link>
+                            <Link to='/titles' className="btn btn-sm btn-primary mt-2">Ver todos</Link> */}
                         </div>
                     </div>
 
-                    {/* <div className="card bg-base-100 shadow-xl rounded-none md:rounded">
+                    <div className="card bg-base-100 shadow-xl rounded-none md:rounded">
                         <div className="card-body">
                             <h2 className="card-title">En progreso</h2>
-                            <TitlesList 
+                            {/* <TitlesList 
                                 titles={titlesWatching}
                                 total={10}
                                 hasMore={hasMore}
@@ -119,14 +110,14 @@ function Dashboard() {
                                 loading={loading}
                                 typeList="sm"
                                 enableInfiniteScroll={false} />
-                            <Link to='/titles?status=watching' className="btn btn-sm btn-primary mt-2">Ver todos</Link>
+                            <Link to='/titles?status=watching' className="btn btn-sm btn-primary mt-2">Ver todos</Link> */}
                         </div>
                     </div>
 
                     <div className="card bg-base-100 shadow-xl rounded-none md:rounded">
                         <div className="card-body">
                             <h2 className="card-title">Por ver</h2>
-                            <TitlesList 
+                            {/* <TitlesList 
                                 titles={titlesPending}
                                 total={10}
                                 hasMore={hasMore}
@@ -135,9 +126,9 @@ function Dashboard() {
                                 loading={loading}
                                 typeList="sm"
                                 enableInfiniteScroll={false} />
-                            <Link to='/titles?status=pending' className="btn btn-sm btn-primary mt-2">Ver todos</Link>
+                            <Link to='/titles?status=pending' className="btn btn-sm btn-primary mt-2">Ver todos</Link> */}
                         </div>
-                    </div> */}
+                    </div>
                 </div>
             </div>
         </div>
