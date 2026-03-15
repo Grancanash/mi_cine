@@ -38,28 +38,37 @@ function Dashboard() {
                 setLoading(true);
                 setError("");
 
-                const [titlesDataRecents, titlesDataWatching, titlesDataPending] = await Promise.all([
+                // const [titlesDataRecents, titlesDataWatching, titlesDataPending] = await Promise.all([
+                //     fetchTitlesApi({
+                //         page: 1,
+                //         order: '-created_at',
+                //         search: "",
+                //         filterCategories: "",
+                //         filterStatus: '',
+                //     }),
+                //     fetchTitlesApi({
+                //         page: 1,
+                //         order: '-created_at',
+                //         search: "",
+                //         filterCategories: "",
+                //         filterStatus: 'status=watching',
+                //     }),
+                //     fetchTitlesApi({
+                //         page: 1,
+                //         order: '-created_at',
+                //         search: "",
+                //         filterCategories: "",
+                //         filterStatus: 'status=pending',
+                //     }),
+                // ]);
+                const [titlesDataRecents] = await Promise.all([
                     fetchTitlesApi({
                         page: 1,
                         order: '-created_at',
                         search: "",
                         filterCategories: "",
                         filterStatus: '',
-                    }),
-                    fetchTitlesApi({
-                        page: 1,
-                        order: '-created_at',
-                        search: "",
-                        filterCategories: "",
-                        filterStatus: 'status=watching',
-                    }),
-                    fetchTitlesApi({
-                        page: 1,
-                        order: '-created_at',
-                        search: "",
-                        filterCategories: "",
-                        filterStatus: 'status=pending',
-                    }),
+                    })
                 ]);
 
                 setTitlesRecent(titlesDataRecents.results.slice(0, 10));
