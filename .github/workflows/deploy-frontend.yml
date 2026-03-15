@@ -22,12 +22,23 @@ jobs:
           ssh-private-key: ${{ secrets.VPS_SSH_KEY }}
 
       - name: Deploy frontend on VPS
+        # run: |
+        #   ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "
+        #     cd /var/www/mi_cine && \
+        #     git pull origin main && \
+        #     cd frontend && \
+        #     npm install && \
+        #     npm run build && \
+        #     mkdir -p /var/www/mi_cine/frontend_dist && \
+        #     rm -rf /var/www/mi_cine/frontend_dist/* && \
+        #     cp -r dist/* /var/www/mi_cine/frontend_dist/
+        #   "
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "
             cd /var/www/mi_cine && \
-            git pull origin main && \
+            git fetch origin main && git reset --hard origin/main
             cd frontend && \
-            npm install && \
+            npm ci && \
             npm run build && \
             mkdir -p /var/www/mi_cine/frontend_dist && \
             rm -rf /var/www/mi_cine/frontend_dist/* && \

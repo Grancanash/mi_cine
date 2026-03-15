@@ -11,8 +11,8 @@ function Dashboard() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const [titlesRecent, setTitlesRecent] = useState<TitleType[]>([]);
-    const [titlesWatching, setTitlesWatching] = useState<TitleType[]>([]);
-    const [titlesPending, setTitlesPending] = useState<TitleType[]>([]);
+    // const [titlesWatching, setTitlesWatching] = useState<TitleType[]>([]);
+    // const [titlesPending, setTitlesPending] = useState<TitleType[]>([]);
     const [hasMore, _setHasMore] = useState(false);
     const loaderInfiniteScrollRef = useRef<HTMLLIElement | null>(null);
 
