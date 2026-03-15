@@ -63,8 +63,8 @@ function Dashboard() {
                 ]);
 
                 setTitlesRecent(titlesDataRecents.results.slice(0, 10));
-                setTitlesWatching(titlesDataWatching.results.slice(0, 10));
-                setTitlesPending(titlesDataPending.results.slice(0, 10));
+                // setTitlesWatching(titlesDataWatching.results.slice(0, 10));
+                // setTitlesPending(titlesDataPending.results.slice(0, 10));
             } catch (err: unknown) {
                 handleAxiosError(err, setError, "Error en la carga inicial");
             } finally {
