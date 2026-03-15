@@ -11,7 +11,7 @@ function Dashboard() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     // const [titlesRecent, setTitlesRecent] = useState<TitleType[]>([]);
-    // const [titlesWatching, setTitlesWatching] = useState<TitleType[]>([]);
+    const [titlesWatching, setTitlesWatching] = useState<TitleType[]>([]);
     const [titlesPending, setTitlesPending] = useState<TitleType[]>([]);
     const [hasMore, _setHasMore] = useState(false);
     const loaderInfiniteScrollRef = useRef<HTMLLIElement | null>(null);
@@ -39,7 +39,7 @@ function Dashboard() {
                 setError("");
 
                 // const [titlesDataRecents, titlesDataWatching, titlesDataPending] = await Promise.all([
-                const [titlesDataPending] = await Promise.all([
+                const [titlesDataWatching, titlesDataPending] = await Promise.all([
                     // fetchTitlesApi({
                     //     page: 1,
                     //     order: '-created_at',
@@ -47,13 +47,13 @@ function Dashboard() {
                     //     filterCategories: "",
                     //     filterStatus: '',
                     // }),
-                    // fetchTitlesApi({
-                    //     page: 1,
-                    //     order: '-created_at',
-                    //     search: "",
-                    //     filterCategories: "",
-                    //     filterStatus: 'status=watching',
-                    // }),
+                    fetchTitlesApi({
+                        page: 1,
+                        order: '-created_at',
+                        search: "",
+                        filterCategories: "",
+                        filterStatus: 'status=watching',
+                    }),
                     fetchTitlesApi({
                         page: 1,
                         order: '-created_at',
@@ -64,7 +64,7 @@ function Dashboard() {
                 ]);
 
                 // setTitlesRecent(titlesDataRecents.results.slice(0, 10));
-                // setTitlesWatching(titlesDataWatching.results.slice(0, 10));
+                setTitlesWatching(titlesDataWatching.results.slice(0, 10));
                 setTitlesPending(titlesDataPending.results.slice(0, 10));
             } catch (err: unknown) {
                 handleAxiosError(err, setError, "Error en la carga inicial");
@@ -97,7 +97,7 @@ function Dashboard() {
                                 enableInfiniteScroll={false} />
                             <Link to='/titles' className="btn btn-sm btn-primary mt-2">Ver todos</Link>
                         </div>
-                    </div>
+                    </div> */}
 
                     <div className="card bg-base-100 shadow-xl rounded-none md:rounded">
                         <div className="card-body">
@@ -113,7 +113,7 @@ function Dashboard() {
                                 enableInfiniteScroll={false} />
                             <Link to='/titles?status=watching' className="btn btn-sm btn-primary mt-2">Ver todos</Link>
                         </div>
-                    </div> */}
+                    </div>
 
                     <div className="card bg-base-100 shadow-xl rounded-none md:rounded">
                         <div className="card-body">
