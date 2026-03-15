@@ -18,7 +18,6 @@ import Swal from "sweetalert2";
 function TitlePage() {
 
     const { id } = useParams<{ id: string }>();
-    const navigate = useNavigate();
     const isEditing = Boolean(id);
 
     const [title, setTitle] = useState<TitleType | null>(null);
@@ -67,6 +66,8 @@ function TitlePage() {
     const [searchResults, setSearchResults] = useState<Record<string, unknown>[]>([]);
     const [searchMsg, setSearchMsg] = useState("");
     const [searchLoading, setSearchLoading] = useState(false);
+
+    const navigate = useNavigate();
 
     // Carga inicial
     useEffect(() => {
@@ -188,6 +189,7 @@ function TitlePage() {
                 const { data: titleData } = await api.patch<TitleType>(`/titles/${id}/`, payload);
                 setTitle(titleData);
                 setSuccess("Título actualizado correctamente.");
+                navigate("/titles");
             } else {
                 const { data: createData } = await api.post<{ id: string; data?: TitleType }>('/titles/', payload);
                 setSuccess("Título creado correctamente.");

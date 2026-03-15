@@ -3,6 +3,7 @@ import ArrowDownIcon from "../icons/ArrowDownIcon";
 import ArrowUpIcon from "../icons/ArrowUpIcon";
 import SearchIcon from "../icons/SearchIcon";
 import { useEffect, useRef } from "react";
+import BtnAdd from "../ui/BtnAdd";
 
 type TitlesToolbarProps = {
     order: string;
@@ -56,9 +57,6 @@ function TitlesToolbar({order, setOrder, total, setDebouncedSearch, loaderMainRe
         };
     }, []);
 
-
-
-
     return(
         <div className="md:px-0">
             <div className="flex flex-col md:flex-row justify-between md:gap-4 items-center">
@@ -88,12 +86,10 @@ function TitlesToolbar({order, setOrder, total, setDebouncedSearch, loaderMainRe
             </div>
             
             <div className="flex flex-col md:flex-row justify-between gap-4 md:items-center p-4 md:p-0 bg-white md:bg-transparent">
-
                 {/* ---------------------------------------------------- BUSCAR TÍTULO */}
                 <div className="flex flex-col md:flex-row items-center md:w-200">
                     <label className="input w-full md:flex-10">
                         <SearchIcon />
-                        {/* <input type="search" placeholder="Buscar" id="titleSearchInput" onChange={(e) => setSearch(e.target.value)} /> */}
                         <input type="search" placeholder="Buscar" id="titleSearchInput" onChange={handleChangeInput} />
                     </label>
                     <div className="total-titles whitespace-nowrap px-4 flex-1 hidden md:block">
@@ -121,6 +117,8 @@ function TitlesToolbar({order, setOrder, total, setDebouncedSearch, loaderMainRe
                     </div>
                 </div>
             </div>
+            {/* ---------------------------------------------------- BOTÓN FLOTANTE AÑADIR TÍTULO */}
+            <BtnAdd />
         </div>
     );
 }

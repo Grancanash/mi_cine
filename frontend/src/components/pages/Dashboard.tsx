@@ -4,6 +4,7 @@ import type { TitlesResponse } from "../../types/TitlesResponse";
 import api, { handleAxiosError } from "../../api/client";
 import type { Title as TitleType } from "../../types/Title";
 import TitlesList from "../titles/TitlesList";
+import BtnAdd from "../ui/BtnAdd";
 
 function Dashboard() {
     const firstLoadRef = useRef(true);
@@ -78,12 +79,21 @@ function Dashboard() {
                 <h1 className="text-2xl font-bold md:mb-6 text-center md:text-left p-3">
                     Bienvenido a Mi Cine
                 </h1>
+                <BtnAdd />
                 <div className="grid md:gap-6 md:grid-cols-2 ">
 
                     <div className="card bg-base-100 shadow-xl rounded-none md:rounded md:border-0 border-b border-gray-300">
                         <div className="card-body">
                             <h2 className="card-title">Últimos añadidos</h2>
-                            <TitlesList titles={titlesRecent} total={10} hasMore={hasMore} error={error} loaderInfiniteScrollRef={loaderInfiniteScrollRef} loading={loading} typeList="sm" />
+                            <TitlesList 
+                                titles={titlesRecent}
+                                total={10}
+                                hasMore={hasMore}
+                                error={error}
+                                loaderInfiniteScrollRef={loaderInfiniteScrollRef}
+                                loading={loading}
+                                typeList="sm"
+                                enableInfiniteScroll={false} />
                             <Link to='/titles' className="btn btn-sm btn-primary mt-2">Ver todos</Link>
                         </div>
                     </div>
@@ -91,7 +101,15 @@ function Dashboard() {
                     <div className="card bg-base-100 shadow-xl rounded-none md:rounded">
                         <div className="card-body">
                             <h2 className="card-title">En progreso</h2>
-                            <TitlesList titles={titlesWatching} total={10} hasMore={hasMore} error={error} loaderInfiniteScrollRef={loaderInfiniteScrollRef} loading={loading} typeList="sm" />
+                            <TitlesList 
+                                titles={titlesWatching}
+                                total={10}
+                                hasMore={hasMore}
+                                error={error}
+                                loaderInfiniteScrollRef={loaderInfiniteScrollRef}
+                                loading={loading}
+                                typeList="sm"
+                                enableInfiniteScroll={false} />
                             <Link to='/titles?status=watching' className="btn btn-sm btn-primary mt-2">Ver todos</Link>
                         </div>
                     </div>
@@ -99,7 +117,15 @@ function Dashboard() {
                     <div className="card bg-base-100 shadow-xl rounded-none md:rounded">
                         <div className="card-body">
                             <h2 className="card-title">Por ver</h2>
-                            <TitlesList titles={titlesPending} total={10} hasMore={hasMore} error={error} loaderInfiniteScrollRef={loaderInfiniteScrollRef} loading={loading} typeList="sm" />
+                            <TitlesList 
+                                titles={titlesPending}
+                                total={10}
+                                hasMore={hasMore}
+                                error={error}
+                                loaderInfiniteScrollRef={loaderInfiniteScrollRef}
+                                loading={loading}
+                                typeList="sm"
+                                enableInfiniteScroll={false} />
                             <Link to='/titles?status=pending' className="btn btn-sm btn-primary mt-2">Ver todos</Link>
                         </div>
                     </div>

@@ -11,9 +11,10 @@ type TitlesListType = {
     loaderInfiniteScrollRef: React.RefObject<HTMLLIElement | null>;
     loading: boolean;
     typeList: string;
+    enableInfiniteScroll?: boolean;
 }
 
-function TitlesList({titles, total, hasMore, error, loaderInfiniteScrollRef, loading, typeList}: TitlesListType) {
+function TitlesList({titles, total, hasMore, error, loaderInfiniteScrollRef, loading, typeList, enableInfiniteScroll = true}: TitlesListType) {
     return (
         <div>
             <ul
@@ -34,12 +35,14 @@ function TitlesList({titles, total, hasMore, error, loaderInfiniteScrollRef, loa
                 ) : !loading ? (
                 <li className="p-20 text-center text-lg">No hay registros</li>
                 ) : null }
+                {enableInfiniteScroll && (
                 <li id="Loader-decoy" ref={loaderInfiniteScrollRef} className={`justify-center py-4 ${hasMore && !error ? 'flex' : 'hidden'}`}>
                     {loading ?
                     <span className="loading loading-spinner loading-sm" /> :
                     <span className="text-sm text-gray-500">Desplázate para cargar más... {hasMore}</span>
                     }
                 </li>
+                )}
             </ul>
             {error && (
             <div className="mt-4 flex justify-center">
