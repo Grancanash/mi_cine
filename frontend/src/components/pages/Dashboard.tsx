@@ -1,32 +1,32 @@
-import { useEffect, useRef } from "react";
-// import { Link } from "react-router-dom";
-// import type { TitlesResponse } from "../../types/TitlesResponse";
-// import api, { handleAxiosError } from "../../api/client";
-// import type { Title as TitleType } from "../../types/Title";
-// import TitlesList from "../titles/TitlesList";
+import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import type { TitlesResponse } from "../../types/TitlesResponse";
+import api, { handleAxiosError } from "../../api/client";
+import type { Title as TitleType } from "../../types/Title";
+import TitlesList from "../titles/TitlesList";
 import BtnAdd from "../ui/BtnAdd";
 
 function Dashboard() {
     const firstLoadRef = useRef(true);
-    // const [loading, setLoading] = useState(false);
-    // const [error, setError] = useState("");
-    // const [titlesRecent, setTitlessetLoadingRecent] = useState<TitleType[]>([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
+    // const [titlesRecent, setTitlesRecent] = useState<TitleType[]>([]);
     // const [titlesWatching, setTitlesWatching] = useState<TitleType[]>([]);
-    // const [titlesPending, setTitlesPending] = useState<TitleType[]>([]);
-    // const [hasMore, _setHasMore] = useState(false);
-    // const loaderInfiniteScrollRef = useRef<HTMLLIElement | null>(null);
+    const [titlesPending, setTitlesPending] = useState<TitleType[]>([]);
+    const [hasMore, _setHasMore] = useState(false);
+    const loaderInfiniteScrollRef = useRef<HTMLLIElement | null>(null);
 
-    // async function fetchTitlesApi(params: {
-    //         page: number;
-    //         order: string;
-    //         search: string;
-    //         filterCategories: string;
-    //         filterStatus: string;
-    //     }) {
-    //     const { page, order, search, filterCategories, filterStatus } = params;
-    //     const { data } = await api.get<TitlesResponse>(`/titles?page=${page}&ordering=${order}&search=${search}&${filterCategories}&${filterStatus}`);
-    //     return data;
-    // }
+    async function fetchTitlesApi(params: {
+            page: number;
+            order: string;
+            search: string;
+            filterCategories: string;
+            filterStatus: string;
+        }) {
+        const { page, order, search, filterCategories, filterStatus } = params;
+        const { data } = await api.get<TitlesResponse>(`/titles?page=${page}&ordering=${order}&search=${search}&${filterCategories}&${filterStatus}`);
+        return data;
+    }
 
     // Carga inicial (títulos + categorías) solo primer render
     useEffect(() => {
@@ -34,42 +34,43 @@ function Dashboard() {
         firstLoadRef.current = false;
 
         (async () => {
-            // try {
-            //     // setLoading(true);
-            //     // setError("");
+            try {
+                setLoading(true);
+                setError("");
 
-            //     // const [titlesDataRecents, titlesDataWatching, titlesDataPending] = await Promise.all([
-            //     //     fetchTitlesApi({
-            //     //         page: 1,
-            //     //         order: '-created_at',
-            //     //         search: "",
-            //     //         filterCategories: "",
-            //     //         filterStatus: '',
-            //     //     }),
-            //     //     fetchTitlesApi({
-            //     //         page: 1,
-            //     //         order: '-created_at',
-            //     //         search: "",
-            //     //         filterCategories: "",
-            //     //         filterStatus: 'status=watching',
-            //     //     }),
-            //     //     fetchTitlesApi({
-            //     //         page: 1,
-            //     //         order: '-created_at',
-            //     //         search: "",
-            //     //         filterCategories: "",
-            //     //         filterStatus: 'status=pending',
-            //     //     }),
-            //     // ]);
+                // const [titlesDataRecents, titlesDataWatching, titlesDataPending] = await Promise.all([
+                const [titlesDataPending] = await Promise.all([
+                    // fetchTitlesApi({
+                    //     page: 1,
+                    //     order: '-created_at',
+                    //     search: "",
+                    //     filterCategories: "",
+                    //     filterStatus: '',
+                    // }),
+                    // fetchTitlesApi({
+                    //     page: 1,
+                    //     order: '-created_at',
+                    //     search: "",
+                    //     filterCategories: "",
+                    //     filterStatus: 'status=watching',
+                    // }),
+                    fetchTitlesApi({
+                        page: 1,
+                        order: '-created_at',
+                        search: "",
+                        filterCategories: "",
+                        filterStatus: 'status=pending',
+                    }),
+                ]);
 
-            //     // setTitlesRecent(titlesDataRecents.results.slice(0, 10));
-            //     // setTitlesWatching(titlesDataWatching.results.slice(0, 10));
-            //     // setTitlesPending(titlesDataPending.results.slice(0, 10));
-            // } catch (err: unknown) {
-            //     handleAxiosError(err, setError, "Error en la carga inicial");
-            // } finally {
-            //     // setLoading(false);
-            // }
+                // setTitlesRecent(titlesDataRecents.results.slice(0, 10));
+                // setTitlesWatching(titlesDataWatching.results.slice(0, 10));
+                setTitlesPending(titlesDataPending.results.slice(0, 10));
+            } catch (err: unknown) {
+                handleAxiosError(err, setError, "Error en la carga inicial");
+            } finally {
+                setLoading(false);
+            }
         })();
     }, []);
     
@@ -82,26 +83,26 @@ function Dashboard() {
                 <BtnAdd />
                 <div className="grid md:gap-6 md:grid-cols-2 ">
 
-                    <div className="card bg-base-100 shadow-xl rounded-none md:rounded md:border-0 border-b border-gray-300">
+                    {/* <div className="card bg-base-100 shadow-xl rounded-none md:rounded md:border-0 border-b border-gray-300">
                         <div className="card-body">
                             <h2 className="card-title">Últimos añadidos</h2>
-                            {/* <TitlesList 
+                            <TitlesList 
                                 titles={titlesRecent}
-                                total={15}
+                                total={10}
                                 hasMore={hasMore}
                                 error={error}
                                 loaderInfiniteScrollRef={loaderInfiniteScrollRef}
                                 loading={loading}
                                 typeList="sm"
                                 enableInfiniteScroll={false} />
-                            <Link to='/titles' className="btn btn-sm btn-primary mt-2">Ver todos</Link> */}
+                            <Link to='/titles' className="btn btn-sm btn-primary mt-2">Ver todos</Link>
                         </div>
                     </div>
 
                     <div className="card bg-base-100 shadow-xl rounded-none md:rounded">
                         <div className="card-body">
                             <h2 className="card-title">En progreso</h2>
-                            {/* <TitlesList 
+                            <TitlesList 
                                 titles={titlesWatching}
                                 total={10}
                                 hasMore={hasMore}
@@ -110,14 +111,14 @@ function Dashboard() {
                                 loading={loading}
                                 typeList="sm"
                                 enableInfiniteScroll={false} />
-                            <Link to='/titles?status=watching' className="btn btn-sm btn-primary mt-2">Ver todos</Link> */}
+                            <Link to='/titles?status=watching' className="btn btn-sm btn-primary mt-2">Ver todos</Link>
                         </div>
-                    </div>
+                    </div> */}
 
                     <div className="card bg-base-100 shadow-xl rounded-none md:rounded">
                         <div className="card-body">
                             <h2 className="card-title">Por ver</h2>
-                            {/* <TitlesList 
+                            <TitlesList 
                                 titles={titlesPending}
                                 total={10}
                                 hasMore={hasMore}
@@ -126,7 +127,7 @@ function Dashboard() {
                                 loading={loading}
                                 typeList="sm"
                                 enableInfiniteScroll={false} />
-                            <Link to='/titles?status=pending' className="btn btn-sm btn-primary mt-2">Ver todos</Link> */}
+                            <Link to='/titles?status=pending' className="btn btn-sm btn-primary mt-2">Ver todos</Link>
                         </div>
                     </div>
                 </div>
