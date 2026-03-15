@@ -87,7 +87,7 @@ function Dashboard() {
                             <h2 className="card-title">Últimos añadidos</h2>
                             <TitlesList 
                                 titles={titlesRecent}
-                                total={10}
+                                total={15}
                                 hasMore={hasMore}
                                 error={error}
                                 loaderInfiniteScrollRef={loaderInfiniteScrollRef}
@@ -98,7 +98,7 @@ function Dashboard() {
                         </div>
                     </div>
 
-                    <div className="card bg-base-100 shadow-xl rounded-none md:rounded">
+                    {/* <div className="card bg-base-100 shadow-xl rounded-none md:rounded">
                         <div className="card-body">
                             <h2 className="card-title">En progreso</h2>
                             <TitlesList 
@@ -128,7 +128,7 @@ function Dashboard() {
                                 enableInfiniteScroll={false} />
                             <Link to='/titles?status=pending' className="btn btn-sm btn-primary mt-2">Ver todos</Link>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>
