@@ -257,7 +257,7 @@ function TitlesPage() {
                 loaderInfiniteScrollRef={loaderInfiniteScrollRef}
                 loading={loading}
                 typeList={'base'}
-                enableInfiniteScroll={false} />
+                enableInfiniteScroll={true} />
         </div>
     );
 }

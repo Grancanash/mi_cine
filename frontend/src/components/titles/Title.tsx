@@ -24,7 +24,6 @@ function Title({title}:{title:TitleType}) {
                         <div className="text-lg font-normal flex-11 flex items-center">{title.name} ({title.year})</div>
 
                         <div className="flex">
-                            
                             {/* ------------------------------------------- VALORACIÓN */}
                             <div className="rating rating-xs rating-half h-12 flex items-center">
                                 <input type="radio" name="rating" className="rating-hidden" />
@@ -39,13 +38,6 @@ function Title({title}:{title:TitleType}) {
                             </div>
 
                             {/* ------------------------------------------- EDICIÓN */}
-                            {/* <div className="flex-1 flex items-center z-30">
-                                <div>
-                                    <Link to={`/titles/${title.id}`} className="btn-title-update btn btn-square btn-ghost hover:bg-transparent hover:border-transparent pointer-events-auto z-20" title="Editar">
-                                        <EditIcon />
-                                    </Link>
-                                </div>
-                            </div> */}
                             <div className="relative z-30">
                                 <Link to={`/titles/${title.id}`} className="btn btn-square btn-ghost" onClick={(e) => e.stopPropagation()}>
                                     <EditIcon />
