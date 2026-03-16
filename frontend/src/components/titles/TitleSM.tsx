@@ -6,8 +6,6 @@ function Title({title}:{title:TitleType}) {
 
     const rating = title.tracking?.rating ?? 0;
     
-    const halves = Array.from({ length: 10 }, (_, i) => i + 1);
-
     return (
         <li className="list-row py-0 font-light flex">
             {/* ------------------------------------------- TÍTULO */}
@@ -15,16 +13,11 @@ function Title({title}:{title:TitleType}) {
 
             <div className="flex">
                 {/* ------------------------------------------- VALORACIÓN */}
-                <div className="rating rating-xs rating-half h-12 flex items-center">
-                    <input type="radio" name="rating" className="rating-hidden" />
-
-                    {halves.map((value, index) => (
-                        <div key={index} className={
-                            "mask mask-star-2 " +
-                            (value % 2 === 1 ? "mask-half-1" : "mask-half-2") +
-                            " bg-orange-400"
-                        } aria-current={rating === value ? "true" : undefined}></div>
-                    ))}
+                <div className="flex items-center pointer-events-none">
+                    {rating}<span className="text-gray-400">/10</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="size-5 text-amber-400">
+                        <path fillRule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clipRule="evenodd" />
+                    </svg>
                 </div>
 
                 {/* ------------------------------------------- EDICIÓN */}
