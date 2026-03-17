@@ -21,7 +21,6 @@ function AppInner() {
         })
         .then(async (res) => {
             if (!res.ok) {
-                setIsLoggedIn(false);
                 return;
             }
             const data = await res.json();
@@ -59,7 +58,7 @@ function AppInner() {
   if (isLoggedIn === null) {
     return (
       <div className="p-4">
-        <p>Cargando...</p>
+        <p className="flex items-center"><span className="loading loading-spinner loading-xs"></span> Cargando...</p>
       </div>
     );
   }
