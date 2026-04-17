@@ -37,6 +37,7 @@ ALLOWED_HOSTS = [
     '217.154.178.102',
     '172.20.47.95',   # IP de WSL
     '192.168.2.204',  # IP de Windows
+    'cine.grancanash.com',
     CLOUDFLARE_URL]
 
 # Application definition
@@ -109,10 +110,6 @@ WSGI_APPLICATION = 'mi_cine.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'mi_cine',
