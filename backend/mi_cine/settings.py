@@ -37,7 +37,7 @@ ALLOWED_HOSTS = [
     '217.154.178.102',
     '172.20.47.95',   # IP de WSL
     '192.168.2.204',  # IP de Windows
-    'cine.grancanash.com',
+    'cine.grancanash.es',
     CLOUDFLARE_URL]
 
 # Application definition
