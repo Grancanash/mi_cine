@@ -277,7 +277,7 @@ class TitlesApiSearchExternalView(View):
         elif title_id:
 
             # Obtener información detallada de título
-            url = f"{TMDB_URL}/{media_type}/{title_id}?language=es-ES"
+            url = f"{TMDB_URL}/{media_type}/{title_id}"
 
             params = {
                 'language': 'es-ES',
@@ -287,32 +287,42 @@ class TitlesApiSearchExternalView(View):
             response = requests.get(url, headers=headers, params=params)
             json = response.json()
 
+            # Validar respuesta de TMDb antes de acceder a los campos
+            if not response.ok or 'success' in json and json['success'] is False:
+                error_msg = json.get('status_message', 'Error desconocido de TMDb')
+                return JsonResponse({
+                    'status': False,
+                    'msg': f'Error en TMDb: {error_msg}'
+                }, status=502)
+
             # Título
-            name = json['name'] if media_type == 'tv' else json['title']
+            name = json.get('name') if media_type == 'tv' else json.get('title', json.get('name', ''))
 
             # Título original
-            original_name = json['original_name'] if media_type == 'tv' else json['original_title']
-            translation = translate(original_name)
-            original_title = f"{original_name} (Google Translator: {translation.capitalize()})"
+            original_name = json.get('original_name') if media_type == 'tv' else json.get(
+                'original_title', json.get('original_name', ''))
+            translation = translate(original_name) if original_name else ''
+            original_title = f"{original_name} (Google Translator: {translation.capitalize()})" if original_name else ''
 
             # Año
-            year = (json['first_air_date'] if media_type == 'tv' else json['release_date'])[:4]
+            date_str = json.get('first_air_date') if media_type == 'tv' else json.get('release_date', '')
+            year = date_str[:4] if date_str else ''
 
             # Descripción
-            description = json['overview']
+            description = json.get('overview', '')
 
             # Categorías
-            categories = [item["name"] for item in json['genres']]
+            categories = [item["name"] for item in json.get('genres', [])]
 
             # Actores
-            language = json['original_language']
+            language = json.get('original_language', '')
             languages = ['ja', 'ko', 'zh']
+            cast = json.get('credits', {}).get('cast', [])
             actors = [romanize_text(item["name"], language) if language in languages else item["name"]
-                      for item in json['credits']['cast'][:5]]
+                      for item in cast[:5]]
 
             # Plataformas
-
-            platforms = [item["name"] for item in json['networks']] if json.get('networks') else []
+            platforms = [item["name"] for item in json.get('networks', [])]
 
             # print('------------- 0 -------------', flush=True)
             # print(json['id'], flush=True)
