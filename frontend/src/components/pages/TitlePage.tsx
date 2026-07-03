@@ -191,9 +191,9 @@ function TitlePage() {
                 setSuccess("Título actualizado correctamente.");
                 navigate("/titles");
             } else {
-                const { data: createData } = await api.post<{ id: string; data?: TitleType }>('/titles/', payload);
+                await api.post<{ id: string; data?: TitleType }>('/titles/', payload);
                 setSuccess("Título creado correctamente.");
-                navigate(`/titles/${createData.id}`);
+                navigate("/titles");
             }
         } catch (err: unknown) {
             const anyErr = err as { response?: { data?: { message?: string } } };
