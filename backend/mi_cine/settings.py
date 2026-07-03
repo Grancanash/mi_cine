@@ -13,34 +13,61 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 import os
 from pathlib import Path
 import socket
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# =============================================================================
+# CARGA DE VARIABLES DE ENTORNO (.env)
+# =============================================================================
+# python-dotenv busca un archivo .env en el directorio backend/.
+# En local, las variables se leen de backend/.env
+# En producción, las variables se inyectan como variables de entorno del sistema.
+load_dotenv(BASE_DIR / '.env')
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
+# =============================================================================
+# ENTORNO: LOCAL vs PRODUCCIÓN
+# =============================================================================
+# True  = desarrollo local
+# False = producción / staging
+# Prioridad: variable de entorno > hostname 'PC-ASH' > False
+DEBUG = os.getenv('DJANGO_DEBUG', str(socket.gethostname() == 'PC-ASH')).lower() in ('true', '1', 'yes')
+
+
+# =============================================================================
+# SEGURIDAD
+# =============================================================================
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "cKIWaS2QksAdluW7oxBe3motKuXZ3cw9YeFfsKeNnuwbxXfOl3mtB3dQSlY3zI32zdRocB8HNwIYiryJ"
+SECRET_KEY = os.getenv(
+    'DJANGO_SECRET_KEY',
+    # Fallback SOLO para desarrollo local; en producción DEBE definirse en el .env
+    'django-insecure-dev-only-change-in-production-xyz789'
+)
+
+# Dominio de producción (usado en ALLOWED_HOSTS, CORS, CSRF)
+# Mantiene compatibilidad con el nombre antiguo CLOUDFLARE_URL
+PRODUCTION_DOMAIN = os.getenv('PRODUCTION_DOMAIN', os.getenv('CLOUDFLARE_URL', ''))
 
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True if socket.gethostname() == 'PC-ASH' else False
+# =============================================================================
+# ALLOWED HOSTS
+# =============================================================================
+# En producción: definir DJANGO_ALLOWED_HOSTS con dominios separados por coma
+# En local: se construye automáticamente con localhost + IPs comunes
+_DEFAULT_HOSTS = 'localhost,127.0.0.1,172.20.47.95,192.168.2.204,217.154.178.102,cine.grancanash.es'
+_ALLOWED_HOSTS_ENV = os.getenv('DJANGO_ALLOWED_HOSTS', _DEFAULT_HOSTS)
+ALLOWED_HOSTS = [h.strip() for h in _ALLOWED_HOSTS_ENV.split(',') if h.strip()]
 
-# Esto permite que Django use la URL que le pases por fuera
-CLOUDFLARE_URL = os.getenv('CLOUDFLARE_URL', 'localhost')
+# Añadir dominio de producción si está definido y no duplicado
+if PRODUCTION_DOMAIN and PRODUCTION_DOMAIN not in ALLOWED_HOSTS:
+    ALLOWED_HOSTS.append(PRODUCTION_DOMAIN)
 
-ALLOWED_HOSTS = [
-    'localhost',
-    '127.0.0.1',
-    '217.154.178.102',
-    '172.20.47.95',   # IP de WSL
-    '192.168.2.204',  # IP de Windows
-    'cine.grancanash.es',
-    CLOUDFLARE_URL]
 
-# Application definition
+# =============================================================================
+# APLICACIONES
+# =============================================================================
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -106,22 +133,24 @@ TEMPLATES = [
 WSGI_APPLICATION = 'mi_cine.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-
+# =============================================================================
+# BASE DE DATOS
+# =============================================================================
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mi_cine',
-        'USER': 'usuario',
-        'PASSWORD': '123456',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'ENGINE': os.getenv('DB_ENGINE', 'django.db.backends.mysql'),
+        'NAME': os.getenv('DB_NAME', 'mi_cine'),
+        'USER': os.getenv('DB_USER', 'usuario'),
+        'PASSWORD': os.getenv('DB_PASSWORD', '123456'),
+        'HOST': os.getenv('DB_HOST', 'localhost'),
+        'PORT': os.getenv('DB_PORT', '3306'),
     },
 }
 
-# Password validation
-# https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
+
+# =============================================================================
+# VALIDACIÓN DE CONTRASEÑAS
+# =============================================================================
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -138,8 +167,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# Internationalization
-# https://docs.djangoproject.com/en/5.2/topics/i18n/
+
+# =============================================================================
+# INTERNACIONALIZACIÓN
+# =============================================================================
 
 LANGUAGE_CODE = 'es'
 
@@ -150,35 +181,54 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.2/howto/static-files/
+# =============================================================================
+# ARCHIVOS ESTÁTICOS
+# =============================================================================
 
 STATIC_URL = 'static/'
-
-# Carpeta donde Django buscará los archivos estáticos en desarrollo
-# STATICFILES_DIRS = [
-#     BASE_DIR / 'mi_cine' / 'static',
-# ]
 
 # Carpeta donde Django recopila los archivos estáticos en producción
 # (solo se usa cuando ejecutas collectstatic)
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
+
+# =============================================================================
+# CONFIGURACIÓN POR DEFECTO
+# =============================================================================
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# settings.py
+
+# =============================================================================
+# EMAIL
+# =============================================================================
+
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DEFAULT_FROM_EMAIL = 'noreply@micien.com'
+
+
+# =============================================================================
+# INTERNAL IPS (django-debug-toolbar)
+# =============================================================================
 
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
 
-TMDB_ACCESS_TOKEN = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzNWM4YzgxM2VkMmIyZjY1ZWRmNDAwMmI2ODRiYjI2OCIsIm5iZiI6MTc2OTQ0NDgxNC40NjQsInN1YiI6IjY5Nzc5NWNlNmM4OWRiMWVlZWI2ODY2NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.n8uJwuJBxK-nZFVXHk4-xUfTWJJJkJL-LzsGngqmCEk'
 
+# =============================================================================
+# TMDB (The Movie Database) — API externa
+# =============================================================================
+
+TMDB_ACCESS_TOKEN = os.getenv(
+    'TMDB_ACCESS_TOKEN',
+    'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzNWM4YzgxM2VkMmIyZjY1ZWRmNDAwMmI2ODRiYjI2OCIsIm5iZiI6MTc2OTQ0NDgxNC40NjQsInN1YiI6IjY5Nzc5NWNlNmM4OWRiMWVlZWI2ODY2NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.n8uJwuJBxK-nZFVXHk4-xUfTWJJJkJL-LzsGngqmCEk'
+)
+
+
+# =============================================================================
+# DJANGO REST FRAMEWORK
+# =============================================================================
 
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
@@ -195,22 +245,33 @@ REST_FRAMEWORK = {
     "PAGE_SIZE": 24,
 }
 
-# CORS (suficiente para React dev en localhost:5173)
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
-    'http://192.168.2.204:5173',  # Ip de casa
-    f"https://{CLOUDFLARE_URL}"
-]
+
+# =============================================================================
+# CORS + CSRF
+# =============================================================================
+# Orígenes por defecto para desarrollo local
+_DEFAULT_CORS = 'http://localhost:5173,http://127.0.0.1:5173,http://192.168.2.204:5173'
+_CORS_ENV = os.getenv('CORS_ALLOWED_ORIGINS', _DEFAULT_CORS)
+CORS_ALLOWED_ORIGINS = [o.strip() for o in _CORS_ENV.split(',') if o.strip()]
+
+if PRODUCTION_DOMAIN:
+    CORS_ALLOWED_ORIGINS.append(f"https://{PRODUCTION_DOMAIN}")
 
 CORS_ALLOW_CREDENTIALS = True
 
-# CSRF (no necesario si usas SessionAuthentication)
-CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
-    'http://192.168.2.204:5173',  # Ip de casa
-    f"https://{CLOUDFLARE_URL}"
-]
+# CSRF
+_CSRF_ENV = os.getenv('CSRF_TRUSTED_ORIGINS', _DEFAULT_CORS)
+CSRF_TRUSTED_ORIGINS = [o.strip() for o in _CSRF_ENV.split(',') if o.strip()]
 
-# test deploy backend
+if PRODUCTION_DOMAIN:
+    CSRF_TRUSTED_ORIGINS.append(f"https://{PRODUCTION_DOMAIN}")
+
+
+# =============================================================================
+# SEGURIDAD ADICIONAL EN PRODUCCIÓN
+# =============================================================================
+if not DEBUG:
+    # Redirigir HTTP → HTTPS (el proxy de Cloudflare ya lo hace, pero por si acaso)
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
