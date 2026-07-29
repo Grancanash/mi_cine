@@ -8,8 +8,13 @@ function Title({title}:{title:TitleType}) {
     const rating = title.tracking?.rating ?? 0;
     const halves = Array.from({ length: 10 }, (_, i) => i + 1);
 
+    const status = title.tracking?.status;
+    const bgColor = status === 'pending' ? 'bg-orange-50'
+                  : status === 'watching' ? 'bg-blue-50'
+                  : '';
+
     return (
-        <li className="list-row p-0 md:px-4 flex rounded-none md:rounded">
+        <li className={`list-row p-0 md:px-4 flex rounded-none md:rounded ${bgColor}`}>
             <div className="flex-11">
                 <div className="collapse collapse-arrow bg-base-100">
                     {/* <input type="checkbox" /> */}

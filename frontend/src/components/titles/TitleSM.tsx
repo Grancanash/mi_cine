@@ -5,9 +5,14 @@ import EditIcon from "../icons/EditIcon";
 function Title({title}:{title:TitleType}) {
 
     const rating = title.tracking?.rating ?? 0;
-    
+
+    const status = title.tracking?.status;
+    const bgColor = status === 'pending' ? 'bg-orange-50'
+                  : status === 'watching' ? 'bg-blue-50'
+                  : '';
+
     return (
-        <li className="list-row py-0 font-light flex">
+        <li className={`list-row py-0 font-light flex ${bgColor}`}>
             {/* ------------------------------------------- TÍTULO */}
             <div className="text-lg flex-11 flex items-center text-[15px]">{title.name} ({title.year})</div>
 
