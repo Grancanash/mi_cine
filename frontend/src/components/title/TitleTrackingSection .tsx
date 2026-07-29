@@ -10,6 +10,7 @@ interface Props {
     }, false>;
     setValueTrackingStatus: React.Dispatch<React.SetStateAction<StatusOption | null | undefined>>;
     showTrackingEpisode: boolean;
+    maxSeasons: number;
     trackingSeason: number | null;
     setTrackingSeason: React.Dispatch<React.SetStateAction<number | null>>;
     trackingEpisode: number | null;
@@ -26,6 +27,7 @@ function TrackingSection ({
     selectStyle,
     setValueTrackingStatus,
     showTrackingEpisode,
+    maxSeasons,
     trackingSeason,
     setTrackingSeason,
     trackingEpisode,
@@ -53,7 +55,8 @@ function TrackingSection ({
                     { showTrackingEpisode &&
                     <div className="flex flex-col gap-1">
                         <label className="font-semibold">Temporada actual</label>
-                        <input type="number" className="input w-20" value={trackingSeason ? String(trackingSeason) : ''}
+                        <input type="number" className="input w-20" min={1} max={maxSeasons}
+                        value={trackingSeason ? String(trackingSeason) : ''}
                         onChange={(e) => setTrackingSeason(e.target.value === '' ? null : Number(e.target.value)) } />
                     </div>
                     }

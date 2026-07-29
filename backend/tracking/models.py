@@ -37,5 +37,13 @@ class Tracking(models.Model):
         if self.rating is not None and not (0 <= self.rating <= 10):
             raise ValidationError({"rating": "El rating debe estar entre 0 y 10."})
 
+        # Validar que la temporada actual no supere el total de temporadas del título
+        if self.current_season is not None and self.title.seasons is not None:
+            if self.current_season > self.title.seasons:
+                raise ValidationError({
+                    "current_season": f"La temporada actual ({self.current_season}) no puede ser mayor que "
+                                      f"el total de temporadas de la serie ({self.title.seasons})."
+                                      })
+
     def __str__(self):
         return f"{self.user.username} - {self.title.name} ({self.status})"

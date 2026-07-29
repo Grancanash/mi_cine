@@ -421,6 +421,7 @@ function TitlePage() {
                     selectStyle={selectStyle}
                     setValueTrackingStatus={setValueTrackingStatus}
                     showTrackingEpisode={showTrackingEpisode}
+                    maxSeasons={Number(seasons) || 1}
                     trackingSeason={trackingSeason}
                     setTrackingSeason={setTrackingSeason}
                     trackingEpisode={trackingEpisode}

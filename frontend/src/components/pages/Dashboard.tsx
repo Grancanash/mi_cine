@@ -77,7 +77,7 @@ function Dashboard() {
         <div className="max-w-250 mx-auto">
             <div className="container mx-auto md:py-5">
                 <h1 className="text-2xl font-bold md:mb-6 text-center md:text-left p-3">
-                    Bienvenido a Mi Cine!!!
+                    Bienvenido a Mi Cine
                 </h1>
                 <BtnAdd />
                 <div className="grid md:gap-6 md:grid-cols-2 ">
