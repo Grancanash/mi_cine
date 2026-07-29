@@ -23,6 +23,7 @@ export interface Title {
     status: string;
     status_display: string;
     rating: number | null;
+    current_season: number | null;
     current_episode: number | null;
     opinion: string;
   }

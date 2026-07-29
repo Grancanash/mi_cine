@@ -27,13 +27,13 @@ class TrackingSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Tracking
-        fields = ["status", 'status_display', "rating", "current_episode", "opinion"]
+        fields = ["status", 'status_display', "rating", "current_season", "current_episode", "opinion"]
 
 
 class TrackingWriteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tracking
-        fields = ["status", "rating", "current_episode", "opinion"]
+        fields = ["status", "rating", "current_season", "current_episode", "opinion"]
 
 
 class TrackingStatusOptionSerializer(serializers.Serializer):

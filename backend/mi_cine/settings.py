@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 import os
 from pathlib import Path
 import socket
-from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,7 +23,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # python-dotenv busca un archivo .env en el directorio backend/.
 # En local, las variables se leen de backend/.env
 # En producción, las variables se inyectan como variables de entorno del sistema.
-load_dotenv(BASE_DIR / '.env')
+try:
+    from dotenv import load_dotenv
+    load_dotenv(BASE_DIR / '.env')
+except ImportError:
+    pass  # python-dotenv no instalado; se usan variables de entorno del sistema
 
 
 # =============================================================================

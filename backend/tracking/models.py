@@ -20,6 +20,8 @@ class Tracking(models.Model):
     status = models.CharField('Estado', max_length=10, choices=STATUS_CHOICES, default=PENDING)
     rating = models.PositiveSmallIntegerField('Valoración (0-10)', null=True, blank=True, validators=[
                                               MinValueValidator(0), MaxValueValidator(10)])
+    current_season = models.PositiveIntegerField(
+        'Temporada actual', null=True, blank=True)  # para series: temporada actual
     current_episode = models.PositiveIntegerField(
         'Episodio actual', null=True, blank=True)  # para series: episodio actual
     opinion = models.TextField('Opinión', blank=True)

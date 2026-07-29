@@ -42,6 +42,7 @@ function TitlePage() {
     const [trackingStatus, setTrackingStatus] = useState<string | "">("pending");
     const [trackingStatusDisplay, setTrackingStatusDisplay] = useState<string | "">("Pendiente");
     const [trackingRating, setTrackingRating] = useState<number | null>(0);
+    const [trackingSeason, setTrackingSeason] = useState<number | null>(null);
     const [trackingEpisode, setTrackingEpisode] = useState<number | null>(null);
     const [trackingOpinion, setTrackingOpinion] = useState("");
 
@@ -112,6 +113,7 @@ function TitlePage() {
                         setTrackingStatus(dataTitle.tracking.status ?? '');
                         setTrackingStatusDisplay(dataTitle.tracking.status_display ?? '');
                         setTrackingRating(dataTitle.tracking.rating ?? null);
+                        setTrackingSeason(dataTitle.tracking.current_season ?? null);
                         setTrackingEpisode(dataTitle.tracking.current_episode ?? null);
                         setTrackingOpinion(dataTitle.tracking.opinion || "");
                     }
@@ -178,6 +180,7 @@ function TitlePage() {
                 tracking: {
                     status: valueTrackingStatus?.value,
                     rating: trackingRating,
+                    current_season: trackingSeason || null,
                     current_episode: trackingEpisode || null,
                     opinion: trackingOpinion
                 }
@@ -418,6 +421,8 @@ function TitlePage() {
                     selectStyle={selectStyle}
                     setValueTrackingStatus={setValueTrackingStatus}
                     showTrackingEpisode={showTrackingEpisode}
+                    trackingSeason={trackingSeason}
+                    setTrackingSeason={setTrackingSeason}
                     trackingEpisode={trackingEpisode}
                     setTrackingEpisode={setTrackingEpisode}
                     trackingRating={trackingRating}

@@ -10,6 +10,8 @@ interface Props {
     }, false>;
     setValueTrackingStatus: React.Dispatch<React.SetStateAction<StatusOption | null | undefined>>;
     showTrackingEpisode: boolean;
+    trackingSeason: number | null;
+    setTrackingSeason: React.Dispatch<React.SetStateAction<number | null>>;
     trackingEpisode: number | null;
     setTrackingEpisode: React.Dispatch<React.SetStateAction<number | null>>;
     trackingRating: number | null;
@@ -24,6 +26,8 @@ function TrackingSection ({
     selectStyle,
     setValueTrackingStatus,
     showTrackingEpisode,
+    trackingSeason,
+    setTrackingSeason,
     trackingEpisode,
     setTrackingEpisode,
     trackingRating,
@@ -45,6 +49,15 @@ function TrackingSection ({
                         onChange={(item) => setValueTrackingStatus(item ?? null)} />
                     </div>
                     
+                    {/* ------------------------------------- TEMPORADA ACTUAL */}
+                    { showTrackingEpisode &&
+                    <div className="flex flex-col gap-1">
+                        <label className="font-semibold">Temporada actual</label>
+                        <input type="number" className="input w-20" value={trackingSeason ? String(trackingSeason) : ''}
+                        onChange={(e) => setTrackingSeason(e.target.value === '' ? null : Number(e.target.value)) } />
+                    </div>
+                    }
+
                     {/* ------------------------------------- EPISODIO ACTUAL */}
                     { showTrackingEpisode &&
                     <div className="flex flex-col gap-1">
