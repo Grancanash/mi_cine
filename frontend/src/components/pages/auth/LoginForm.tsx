@@ -54,7 +54,7 @@ const LoginForm = ({ onLoggedIn }: Props) => {
             <form className="m-0! space-y-4 max-w-sm mx-auto" onSubmit={handleSubmit}>
             <div className="form-control">
                 <label className="label">
-                <span className="label-text">Usuario!!!</span>
+                <span className="label-text">Usuario</span>
                 </label>
                 <input
                 className="input input-bordered w-full"
